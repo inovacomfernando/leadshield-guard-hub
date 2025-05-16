@@ -28,7 +28,7 @@ export function AppSidebar() {
       <SidebarHeader className="p-4">
         <div className="flex items-center space-x-2">
           <img 
-            src="/logoshild.svg"
+            src="/logoshildv.1.svg"
             alt="LeadShield logo" 
             className="h-8 w-8 text-forest-500" 
           />
