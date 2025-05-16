@@ -22,8 +22,8 @@ export function AppSidebar() {
 
   return (
     <Sidebar 
-      collapsed={collapsed} 
-      onCollapsedChange={setCollapsed}
+      side="left"
+      variant="sidebar"
     >
       <SidebarHeader className="p-4">
         <div className="flex items-center space-x-2">
