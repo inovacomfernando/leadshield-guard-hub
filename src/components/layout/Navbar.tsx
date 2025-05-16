@@ -44,7 +44,7 @@ const Navbar = () => {
             <Menu className="h-5 w-5" />
           </SidebarTrigger>
           <img 
-            src="/logo.svg" 
+            src="/leadshild.svg" 
             alt="LeadShield Logo" 
             className="h-6 w-6 md:block hidden" 
           />
