@@ -27,7 +27,11 @@ export function AppSidebar() {
     >
       <SidebarHeader className="p-4">
         <div className="flex items-center space-x-2">
-          <Shield className="h-8 w-8 text-forest-500" />
+          <img 
+            src="/logo.svg" 
+            alt="LeadShield Logo" 
+            className="h-8 w-8 text-forest-500" 
+          />
           {!collapsed && <h2 className="text-xl font-bold text-forest-900 dark:text-white">LeadShield</h2>}
         </div>
       </SidebarHeader>

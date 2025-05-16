@@ -43,6 +43,11 @@ const Navbar = () => {
           <SidebarTrigger className="w-10 h-10 mr-2 flex items-center justify-center">
             <Menu className="h-5 w-5" />
           </SidebarTrigger>
+          <img 
+            src="/logo.svg" 
+            alt="LeadShield Logo" 
+            className="h-6 w-6 md:block hidden" 
+          />
         </div>
 
         <div className="flex items-center space-x-4">
