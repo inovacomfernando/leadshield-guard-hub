@@ -9,10 +9,9 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { useAuth } from "@/context/AuthContext";
-import { Shield, Home, Users, Settings, CreditCard, LogOut } from "lucide-react";
+import { Shield, Home, Users, Settings, CreditCard, LogOut, ChartBar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function AppSidebar() {
@@ -50,6 +49,14 @@ export function AppSidebar() {
               <Link to="/leads" className="flex items-center space-x-2">
                 <Users className="h-5 w-5" />
                 {!collapsed && <span>Leads</span>}
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild className={location.pathname === "/features" ? "bg-forest-100 dark:bg-forest-800 text-forest-900 dark:text-white" : ""}>
+              <Link to="/features" className="flex items-center space-x-2">
+                <Shield className="h-5 w-5" />
+                {!collapsed && <span>Features</span>}
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>

@@ -15,6 +15,7 @@ import Dashboard from "./pages/Dashboard";
 import Leads from "./pages/Leads";
 import Settings from "./pages/Settings";
 import Billing from "./pages/Billing";
+import Features from "./pages/Features";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -64,6 +65,7 @@ const App = () => (
               <Route path="/leads" element={<PrivateRoute element={<Leads />} />} />
               <Route path="/settings" element={<PrivateRoute element={<Settings />} />} />
               <Route path="/billing" element={<PrivateRoute element={<Billing />} />} />
+              <Route path="/features" element={<PrivateRoute element={<Features />} />} />
 
               {/* 404 route */}
               <Route path="*" element={<NotFound />} />
