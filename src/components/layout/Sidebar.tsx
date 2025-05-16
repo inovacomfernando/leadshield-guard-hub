@@ -21,7 +21,10 @@ export function AppSidebar() {
   const [collapsed, setCollapsed] = useState(false);
 
   return (
-    <Sidebar defaultCollapsed={false} collapsed={collapsed} onCollapsedChange={setCollapsed}>
+    <Sidebar 
+      collapsed={collapsed} 
+      onCollapsedChange={setCollapsed}
+    >
       <SidebarHeader className="p-4">
         <div className="flex items-center space-x-2">
           <Shield className="h-8 w-8 text-forest-500" />
