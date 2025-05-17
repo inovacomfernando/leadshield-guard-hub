@@ -27,25 +27,24 @@ const Features: React.FC = () => {
         <SearchBar value={searchQuery} onChange={setSearchQuery} />
       </div>
 
-      {/* Properly structure Tabs with TabsList and TabsContent as direct children */}
-      <Tabs value={activeTab} defaultValue="all">
+      <Tabs value={activeTab} onValueChange={setActiveTab} defaultValue="all">
         <TabsList className="hidden">
           <TabsTrigger value="all">All</TabsTrigger>
           <TabsTrigger value="included">Included</TabsTrigger>
           <TabsTrigger value="available">Available</TabsTrigger>
         </TabsList>
         
-        <TabsContent value="all" className="mt-0">
+        <TabsContent value="all">
           <FeaturesComparison features={featuresList} />
         </TabsContent>
         
-        <TabsContent value="included" className="mt-0">
+        <TabsContent value="included">
           <FeaturesComparison features={featuresList.filter(f => 
             user?.subscription?.plan && f.includedIn[user.subscription.plan as keyof typeof f.includedIn]
           )} />
         </TabsContent>
         
-        <TabsContent value="available" className="mt-0">
+        <TabsContent value="available">
           <FeaturesComparison features={featuresList.filter(f => 
             user?.subscription?.plan && !f.includedIn[user.subscription.plan as keyof typeof f.includedIn]
           )} />

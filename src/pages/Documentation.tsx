@@ -1,232 +1,245 @@
 
 import React from "react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Shield, BookOpen, Code, ExternalLink, Mail, FileText } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-const Documentation: React.FC = () => {
+const Documentation = () => {
   return (
-    <div className="container mx-auto py-20 px-4">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8 text-center">LeadShield Documentation</h1>
-
-        <Tabs defaultValue="overview" className="w-full">
-          <TabsList className="grid grid-cols-4 mb-8">
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="installation">Installation</TabsTrigger>
-            <TabsTrigger value="usage">Usage Guide</TabsTrigger>
-            <TabsTrigger value="api">API Reference</TabsTrigger>
+    <div className="min-h-screen pb-16 pt-24 bg-white dark:bg-forest-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Hero section */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-forest-900 dark:text-white mb-4">LeadShield Documentation</h1>
+          <p className="text-xl text-forest-600 dark:text-forest-300 max-w-3xl mx-auto">
+            Everything you need to know to get started with LeadShield and protect your business from fraudulent leads.
+          </p>
+        </div>
+        
+        {/* Documentation tabs */}
+        <Tabs defaultValue="getting-started" className="mb-12">
+          <TabsList className="grid grid-cols-2 md:grid-cols-4 mb-8">
+            <TabsTrigger value="getting-started">Getting Started</TabsTrigger>
+            <TabsTrigger value="features">Features</TabsTrigger>
+            <TabsTrigger value="integration">Integration</TabsTrigger>
+            <TabsTrigger value="support">Support</TabsTrigger>
           </TabsList>
-
-          <TabsContent value="overview">
-            <Card>
-              <CardHeader>
-                <CardTitle>LeadShield Overview</CardTitle>
-                <CardDescription>
-                  Your complete solution for lead tracking and protection
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <section className="space-y-3">
-                  <h3 className="text-lg font-semibold">What is LeadShield?</h3>
-                  <p>
-                    LeadShield is a comprehensive platform designed to help businesses track, analyze, and protect their leads.
-                    Our system uses advanced algorithms to score leads based on visitor behavior, helping you identify and prioritize
-                    the most promising prospects.
+          
+          <TabsContent value="getting-started">
+            <div className="grid md:grid-cols-3 gap-8">
+              <Card className="md:col-span-3 border border-forest-100 dark:border-forest-700">
+                <CardHeader>
+                  <CardTitle className="text-xl text-forest-900 dark:text-white flex items-center">
+                    <BookOpen className="mr-2 h-5 w-5 text-forest-500" />
+                    Welcome to LeadShield
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-forest-600 dark:text-forest-300 mb-4">
+                    LeadShield is your comprehensive solution for protecting your business from fraudulent leads. This guide will help you set up and configure your LeadShield account to maximize your protection.
                   </p>
-                </section>
-
-                <section className="space-y-3">
-                  <h3 className="text-lg font-semibold">Key Features</h3>
-                  <ul className="list-disc pl-6 space-y-2">
-                    <li>Lead tracking and monitoring</li>
-                    <li>Advanced lead scoring algorithms</li>
-                    <li>Bot and spam protection</li>
-                    <li>Custom scoring rules</li>
-                    <li>Detailed analytics and insights</li>
-                    <li>Webhook integrations for seamless connection to your existing tools</li>
-                    <li>Team collaboration tools</li>
+                </CardContent>
+              </Card>
+              
+              <Card className="border border-forest-100 dark:border-forest-700">
+                <CardHeader>
+                  <CardTitle className="text-lg text-forest-900 dark:text-white">1. Create Your Account</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                  <p className="text-forest-600 dark:text-forest-300">
+                    • Sign up at leadshield.com<br />
+                    • Verify your email address<br />
+                    • Choose your subscription plan<br />
+                    • Complete your profile information
+                  </p>
+                  <Button className="w-full mt-4 bg-forest-500 hover:bg-forest-600">
+                    Create Account
+                  </Button>
+                </CardContent>
+              </Card>
+              
+              <Card className="border border-forest-100 dark:border-forest-700">
+                <CardHeader>
+                  <CardTitle className="text-lg text-forest-900 dark:text-white">2. Configure Your Dashboard</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                  <p className="text-forest-600 dark:text-forest-300">
+                    • Navigate to Settings<br />
+                    • Set up default scoring parameters<br />
+                    • Create custom rules (if applicable)<br />
+                    • Configure notification preferences
+                  </p>
+                  <Button variant="outline" className="w-full mt-4">
+                    Dashboard Tutorial
+                  </Button>
+                </CardContent>
+              </Card>
+              
+              <Card className="border border-forest-100 dark:border-forest-700">
+                <CardHeader>
+                  <CardTitle className="text-lg text-forest-900 dark:text-white">3. Integrate With Your Systems</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                  <p className="text-forest-600 dark:text-forest-300">
+                    • Choose your integration method<br />
+                    • Follow the integration guide<br />
+                    • Test the integration<br />
+                    • Monitor initial results
+                  </p>
+                  <Button variant="outline" className="w-full mt-4">
+                    Integration Options
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
+          
+          <TabsContent value="features">
+            <div className="grid md:grid-cols-2 gap-8">
+              <Card className="border border-forest-100 dark:border-forest-700">
+                <CardHeader>
+                  <CardTitle className="text-lg text-forest-900 dark:text-white flex items-center">
+                    <Shield className="mr-2 h-5 w-5 text-forest-500" />
+                    Lead Scoring
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-forest-600 dark:text-forest-300 mb-4">
+                    Our core feature is the advanced lead scoring system that analyzes multiple data points to determine the legitimacy of each lead.
+                  </p>
+                  <h3 className="font-semibold text-forest-900 dark:text-white mb-2">Scoring Factors:</h3>
+                  <ul className="list-disc pl-5 space-y-1 text-forest-600 dark:text-forest-300">
+                    <li>Email validation and reputation</li>
+                    <li>IP address analysis</li>
+                    <li>Form submission behavior</li>
+                    <li>Data consistency checks</li>
+                    <li>Machine learning pattern recognition</li>
                   </ul>
-                </section>
-
-                <section className="space-y-3">
-                  <h3 className="text-lg font-semibold">Subscription Plans</h3>
-                  <p>
-                    LeadShield offers flexible subscription plans to meet your business needs:
+                </CardContent>
+              </Card>
+              
+              <Card className="border border-forest-100 dark:border-forest-700">
+                <CardHeader>
+                  <CardTitle className="text-lg text-forest-900 dark:text-white flex items-center">
+                    <Code className="mr-2 h-5 w-5 text-forest-500" />
+                    Custom Rules
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-forest-600 dark:text-forest-300 mb-4">
+                    Create customized scoring rules tailored to your specific business needs and industry requirements.
                   </p>
-                  <ul className="list-disc pl-6 space-y-2">
-                    <li><strong>Free Plan:</strong> Basic lead tracking for small businesses (up to 100 leads/month)</li>
-                    <li><strong>Starter Plan:</strong> Enhanced tracking and basic scoring (up to 500 leads/month)</li>
-                    <li><strong>Growth Plan:</strong> Advanced scoring and analytics (up to 2,000 leads/month)</li>
-                    <li><strong>Full Shield Plan:</strong> Complete protection suite with unlimited leads</li>
+                  <h3 className="font-semibold text-forest-900 dark:text-white mb-2">Rule Configuration Options:</h3>
+                  <ul className="list-disc pl-5 space-y-1 text-forest-600 dark:text-forest-300">
+                    <li>Field-specific validation rules</li>
+                    <li>Geographic restrictions</li>
+                    <li>Time-based submission patterns</li>
+                    <li>Custom scoring weights</li>
+                    <li>Industry-specific validations</li>
                   </ul>
-                </section>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </div>
           </TabsContent>
-
-          <TabsContent value="installation">
-            <Card>
-              <CardHeader>
-                <CardTitle>Installation Guide</CardTitle>
-                <CardDescription>
-                  Follow these steps to set up LeadShield on your website
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <section className="space-y-3">
-                  <h3 className="text-lg font-semibold">Step 1: Account Setup</h3>
-                  <p>
-                    Create your LeadShield account by signing up on our platform. Once your account is created,
-                    you'll be able to access your dashboard and API keys.
-                  </p>
-                </section>
-
-                <section className="space-y-3">
-                  <h3 className="text-lg font-semibold">Step 2: Install the Base Script</h3>
-                  <div className="bg-slate-100 dark:bg-slate-800 p-4 rounded-md overflow-x-auto">
-                    <pre className="text-sm">
-                      <code>{`<script src="https://api.leadshield.com/tracker.js?key=YOUR_API_KEY"></script>`}</code>
-                    </pre>
+          
+          <TabsContent value="integration">
+            <div className="space-y-8">
+              <Card className="border border-forest-100 dark:border-forest-700">
+                <CardHeader>
+                  <CardTitle className="text-xl text-forest-900 dark:text-white">Integration Options</CardTitle>
+                  <CardDescription>
+                    LeadShield offers multiple integration options to fit your technical requirements and existing systems.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <h3 className="font-semibold text-forest-900 dark:text-white mb-2">JavaScript Snippet Integration</h3>
+                      <p className="text-forest-600 dark:text-forest-300 mb-2">
+                        The easiest way to integrate LeadShield is by adding our JavaScript snippet to your website's forms.
+                      </p>
+                      <div className="bg-forest-50 dark:bg-forest-800 p-4 rounded-md mb-4">
+                        <pre className="text-sm text-forest-700 dark:text-forest-300 overflow-x-auto">
+                          {`<script src="https://api.leadshield.com/js/shield.js" 
+  data-key="YOUR_API_KEY">
+</script>`}
+                        </pre>
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <h3 className="font-semibold text-forest-900 dark:text-white mb-2">API Reference</h3>
+                      <p className="text-forest-600 dark:text-forest-300 mb-2">
+                        For developers looking to create custom integrations with our REST API.
+                      </p>
+                      <Button className="mt-2" variant="outline">
+                        <FileText className="mr-2 h-4 w-4" />
+                        API Documentation
+                      </Button>
+                    </div>
                   </div>
-                  <p>
-                    Add this script to the <code>{"<head>"}</code> section of your website. Replace <code>YOUR_API_KEY</code> with
-                    the API key from your LeadShield dashboard.
-                  </p>
-                </section>
-
-                <section className="space-y-3">
-                  <h3 className="text-lg font-semibold">Step 3: Configure Your Settings</h3>
-                  <p>
-                    Visit your LeadShield dashboard to customize your lead scoring rules, notification preferences,
-                    and integration settings.
-                  </p>
-                </section>
-
-                <section className="space-y-3">
-                  <h3 className="text-lg font-semibold">Step 4: Test Your Implementation</h3>
-                  <p>
-                    Use our built-in testing tools to verify that LeadShield is properly installed and tracking leads
-                    on your website.
-                  </p>
-                </section>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </div>
           </TabsContent>
-
-          <TabsContent value="usage">
-            <Card>
-              <CardHeader>
-                <CardTitle>Usage Guide</CardTitle>
-                <CardDescription>
-                  Learn how to make the most of LeadShield
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <section className="space-y-3">
-                  <h3 className="text-lg font-semibold">Dashboard Navigation</h3>
-                  <p>
-                    The LeadShield dashboard provides a comprehensive view of your lead activity. Here you can view lead statistics,
-                    manage settings, and access detailed reports.
-                  </p>
-                </section>
-
-                <section className="space-y-3">
-                  <h3 className="text-lg font-semibold">Tracking Lead Activity</h3>
-                  <p>
-                    LeadShield automatically tracks visitor behavior on your site, including page views, time on site, form interactions,
-                    and more. This data is used to create lead profiles and calculate lead scores.
-                  </p>
-                </section>
-
-                <section className="space-y-3">
-                  <h3 className="text-lg font-semibold">Customizing Lead Scoring Rules</h3>
-                  <p>
-                    Create custom scoring rules based on your specific business needs. Assign point values to different actions
-                    and behaviors to identify high-value leads.
-                  </p>
-                </section>
-
-                <section className="space-y-3">
-                  <h3 className="text-lg font-semibold">Setting Up Integrations</h3>
-                  <p>
-                    Connect LeadShield to your CRM, email marketing platform, or other tools using our webhook integrations.
-                    This allows for seamless data sharing across your tech stack.
-                  </p>
-                </section>
-
-                <section className="space-y-3">
-                  <h3 className="text-lg font-semibold">Analyzing Reports</h3>
-                  <p>
-                    Use our built-in analytics to gain insights into lead behavior, conversion rates, and the effectiveness
-                    of your marketing campaigns.
-                  </p>
-                </section>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="api">
-            <Card>
-              <CardHeader>
-                <CardTitle>API Reference</CardTitle>
-                <CardDescription>
-                  Technical documentation for developers
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <section className="space-y-3">
-                  <h3 className="text-lg font-semibold">Authentication</h3>
-                  <p>
-                    All API requests require an API key, which should be included in the request header:
-                  </p>
-                  <div className="bg-slate-100 dark:bg-slate-800 p-4 rounded-md overflow-x-auto">
-                    <pre className="text-sm">
-                      <code>{`Authorization: Bearer YOUR_API_KEY`}</code>
-                    </pre>
+          
+          <TabsContent value="support">
+            <div className="space-y-6">
+              <Card className="border border-forest-100 dark:border-forest-700">
+                <CardHeader>
+                  <CardTitle className="text-xl text-forest-900 dark:text-white">Support Options</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid md:grid-cols-3 gap-6">
+                    <Card className="border border-forest-100 dark:border-forest-700">
+                      <CardHeader>
+                        <CardTitle className="text-lg text-forest-900 dark:text-white">Email Support</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-forest-600 dark:text-forest-300 mb-4">
+                          Send us an email and we'll get back to you within 24 hours.
+                        </p>
+                        <Button variant="outline" className="w-full flex items-center justify-center">
+                          <Mail className="mr-2 h-4 w-4" />
+                          Contact Support
+                        </Button>
+                      </CardContent>
+                    </Card>
+                    
+                    <Card className="border border-forest-100 dark:border-forest-700">
+                      <CardHeader>
+                        <CardTitle className="text-lg text-forest-900 dark:text-white">Documentation</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-forest-600 dark:text-forest-300 mb-4">
+                          Browse our comprehensive documentation for answers to common questions.
+                        </p>
+                        <Button variant="outline" className="w-full flex items-center justify-center">
+                          <BookOpen className="mr-2 h-4 w-4" />
+                          Browse Docs
+                        </Button>
+                      </CardContent>
+                    </Card>
+                    
+                    <Card className="border border-forest-100 dark:border-forest-700">
+                      <CardHeader>
+                        <CardTitle className="text-lg text-forest-900 dark:text-white">Developer Resources</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-forest-600 dark:text-forest-300 mb-4">
+                          Access developer resources, API documentation, and code samples.
+                        </p>
+                        <Button variant="outline" className="w-full flex items-center justify-center">
+                          <ExternalLink className="mr-2 h-4 w-4" />
+                          Developer Hub
+                        </Button>
+                      </CardContent>
+                    </Card>
                   </div>
-                </section>
-
-                <section className="space-y-3">
-                  <h3 className="text-lg font-semibold">Lead Endpoints</h3>
-                  <div className="bg-slate-100 dark:bg-slate-800 p-4 rounded-md overflow-x-auto">
-                    <pre className="text-sm">
-                      <code>{`GET /api/leads - List all leads
-GET /api/leads/{id} - Get a specific lead
-POST /api/leads - Create a new lead
-PUT /api/leads/{id} - Update a lead
-DELETE /api/leads/{id} - Delete a lead`}</code>
-                    </pre>
-                  </div>
-                </section>
-
-                <section className="space-y-3">
-                  <h3 className="text-lg font-semibold">Webhook Integration</h3>
-                  <p>
-                    LeadShield can send lead data to your systems via webhooks. Configure your webhook URL in the dashboard.
-                  </p>
-                  <div className="bg-slate-100 dark:bg-slate-800 p-4 rounded-md overflow-x-auto">
-                    <pre className="text-sm">
-                      <code>{`POST https://your-webhook-url.com
-{
-  "event": "new_lead",
-  "lead_id": "123456",
-  "email": "example@domain.com",
-  "score": 85,
-  "timestamp": "2023-05-17T14:30:00Z"
-}`}</code>
-                    </pre>
-                  </div>
-                </section>
-
-                <section className="space-y-3">
-                  <h3 className="text-lg font-semibold">Rate Limits</h3>
-                  <p>
-                    API requests are limited to 100 requests per minute per API key. If you exceed this limit,
-                    you'll receive a 429 Too Many Requests response.
-                  </p>
-                </section>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </div>
           </TabsContent>
         </Tabs>
       </div>
