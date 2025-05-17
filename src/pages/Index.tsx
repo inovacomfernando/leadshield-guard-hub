@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { Shield, CheckCircle, ChevronRight, ArrowRight, Users, Settings, CreditCard } from "lucide-react";
+import { Shield, CheckCircle, ChevronRight, ArrowRight, Users, Settings, CreditCard, Instagram, Youtube } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import DarkModeToggle from "@/components/layout/DarkModeToggle";
 import { useTheme } from "@/context/ThemeContext";
@@ -357,6 +357,14 @@ const Index = () => {
                 Protecting businesses from fraudulent leads with intelligent scoring.
               </p>
               <div className="flex space-x-4">
+                <a href="https://instagram.com/leadshield" target="_blank" rel="noopener noreferrer" className="text-forest-500 hover:text-forest-700 dark:hover:text-forest-300">
+                  <span className="sr-only">Instagram</span>
+                  <Instagram className="h-6 w-6" />
+                </a>
+                <a href="https://youtube.com/leadshield" target="_blank" rel="noopener noreferrer" className="text-forest-500 hover:text-forest-700 dark:hover:text-forest-300">
+                  <span className="sr-only">YouTube</span>
+                  <Youtube className="h-6 w-6" />
+                </a>
                 <a href="#" className="text-forest-500 hover:text-forest-700 dark:hover:text-forest-300">
                   <span className="sr-only">Twitter</span>
                   <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">

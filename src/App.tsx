@@ -16,6 +16,8 @@ import Leads from "./pages/Leads";
 import Settings from "./pages/Settings";
 import Billing from "./pages/Billing";
 import Features from "./pages/Features";
+import SuccessStories from "./pages/SuccessStories";
+import UserManual from "./pages/UserManual";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -59,6 +61,8 @@ const App = () => (
               {/* Public routes */}
               <Route path="/" element={<Index />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/success-stories" element={<SuccessStories />} />
+              <Route path="/user-manual" element={<UserManual />} />
 
               {/* Protected routes */}
               <Route path="/dashboard" element={<PrivateRoute element={<Dashboard />} />} />
