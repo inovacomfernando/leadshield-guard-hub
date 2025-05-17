@@ -295,60 +295,53 @@ const Features: React.FC = () => {
             <TabsTrigger value="included">Included in Plan</TabsTrigger>
             <TabsTrigger value="available">Available to Add</TabsTrigger>
           </TabsList>
+        
+          {/* Fix: Moving TabsContent inside the Tabs component */}
+          <TabsContent value="all" className="mt-0">
+            <div className="space-y-8">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Features Comparison</CardTitle>
+                  <CardDescription>
+                    Compare features across different plans
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left">
+                      <thead>
+                        <tr className="border-b">
+                          <th className="pb-4 font-medium">Feature</th>
+                          <th className="pb-4 font-medium text-center">Free</th>
+                          <th className="pb-4 font-medium text-center">Starter</th>
+                          <th className="pb-4 font-medium text-center">Growth</th>
+                          <th className="pb-4 font-medium text-center">Full Shield</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {features.map((feature, index) => (
+                          <tr key={index} className="border-b">
+                            <td className="py-4">
+                              <div className="flex items-center space-x-2">
+                                <feature.icon className="h-5 w-5 text-muted-foreground" />
+                                <span className="font-medium">{feature.name}</span>
+                              </div>
+                            </td>
+                            <td className="py-4 text-center">{renderFeatureValue(feature.includedIn.free)}</td>
+                            <td className="py-4 text-center">{renderFeatureValue(feature.includedIn.start)}</td>
+                            <td className="py-4 text-center">{renderFeatureValue(feature.includedIn.growth)}</td>
+                            <td className="py-4 text-center">{renderFeatureValue(feature.includedIn.full)}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
         </Tabs>
-        <div className="w-full sm:w-64">
-          <Input 
-            placeholder="Search features..." 
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full"
-          />
-        </div>
       </div>
-
-      <TabsContent value="all" className="mt-0">
-        <div className="space-y-8">
-          <Card>
-            <CardHeader>
-              <CardTitle>Features Comparison</CardTitle>
-              <CardDescription>
-                Compare features across different plans
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="overflow-x-auto">
-                <table className="w-full text-left">
-                  <thead>
-                    <tr className="border-b">
-                      <th className="pb-4 font-medium">Feature</th>
-                      <th className="pb-4 font-medium text-center">Free</th>
-                      <th className="pb-4 font-medium text-center">Starter</th>
-                      <th className="pb-4 font-medium text-center">Growth</th>
-                      <th className="pb-4 font-medium text-center">Full Shield</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {features.map((feature, index) => (
-                      <tr key={index} className="border-b">
-                        <td className="py-4">
-                          <div className="flex items-center space-x-2">
-                            <feature.icon className="h-5 w-5 text-muted-foreground" />
-                            <span className="font-medium">{feature.name}</span>
-                          </div>
-                        </td>
-                        <td className="py-4 text-center">{renderFeatureValue(feature.includedIn.free)}</td>
-                        <td className="py-4 text-center">{renderFeatureValue(feature.includedIn.start)}</td>
-                        <td className="py-4 text-center">{renderFeatureValue(feature.includedIn.growth)}</td>
-                        <td className="py-4 text-center">{renderFeatureValue(feature.includedIn.full)}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </TabsContent>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
         {filteredFeatures.map((feature, index) => (
