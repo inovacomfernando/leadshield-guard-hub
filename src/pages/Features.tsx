@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { useAuth } from "@/context/AuthContext";
@@ -26,6 +27,7 @@ const Features: React.FC = () => {
         <SearchBar value={searchQuery} onChange={setSearchQuery} />
       </div>
 
+      {/* The TabsContent must be direct children of Tabs, not used separately */}
       <Tabs value={activeTab} defaultValue="all">
         <TabsContent value="all" className="mt-0">
           <FeaturesComparison features={featuresList} />
