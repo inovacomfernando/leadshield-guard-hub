@@ -27,7 +27,7 @@ const Features: React.FC = () => {
         <SearchBar value={searchQuery} onChange={setSearchQuery} />
       </div>
 
-      <Tabs value={activeTab} onValueChange={setActiveTab} defaultValue="all">
+      <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab}>
         <TabsList className="hidden">
           <TabsTrigger value="all">All</TabsTrigger>
           <TabsTrigger value="included">Included</TabsTrigger>
