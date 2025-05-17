@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-import { Tabs, TabsContent } from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/context/AuthContext";
 import { featuresList } from "@/data/features";
 import FeaturesFilters from "@/components/features/FeaturesFilters";
@@ -27,18 +27,28 @@ const Features: React.FC = () => {
         <SearchBar value={searchQuery} onChange={setSearchQuery} />
       </div>
 
-      {/* The TabsContent must be direct children of Tabs, not used separately */}
+      {/* Properly structure Tabs with TabsList and TabsContent as direct children */}
       <Tabs value={activeTab} defaultValue="all">
+        <TabsList className="hidden">
+          <TabsTrigger value="all">All</TabsTrigger>
+          <TabsTrigger value="included">Included</TabsTrigger>
+          <TabsTrigger value="available">Available</TabsTrigger>
+        </TabsList>
+        
         <TabsContent value="all" className="mt-0">
           <FeaturesComparison features={featuresList} />
         </TabsContent>
         
         <TabsContent value="included" className="mt-0">
-          {/* This tab will automatically show only included features through the grid filter */}
+          <FeaturesComparison features={featuresList.filter(f => 
+            user?.subscription?.plan && f.includedIn[user.subscription.plan as keyof typeof f.includedIn]
+          )} />
         </TabsContent>
         
         <TabsContent value="available" className="mt-0">
-          {/* This tab will automatically show only available features through the grid filter */}
+          <FeaturesComparison features={featuresList.filter(f => 
+            user?.subscription?.plan && !f.includedIn[user.subscription.plan as keyof typeof f.includedIn]
+          )} />
         </TabsContent>
       </Tabs>
 

@@ -17,7 +17,7 @@ import Settings from "./pages/Settings";
 import Billing from "./pages/Billing";
 import Features from "./pages/Features";
 import SuccessStories from "./pages/SuccessStories";
-import UserManual from "./pages/UserManual";
+import Documentation from "./pages/Documentation";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -62,7 +62,7 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/login" element={<Login />} />
               <Route path="/success-stories" element={<SuccessStories />} />
-              <Route path="/user-manual" element={<UserManual />} />
+              <Route path="/documentation" element={<Documentation />} />
 
               {/* Protected routes */}
               <Route path="/dashboard" element={<PrivateRoute element={<Dashboard />} />} />

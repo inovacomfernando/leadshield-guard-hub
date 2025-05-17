@@ -1,10 +1,12 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { CheckCircle } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { toast } from "@/components/ui/use-toast";
+import { useAuth } from "@/context/AuthContext";
+import { useSupabaseClient } from "@/lib/supabase";
 import { Feature } from "@/types/features";
 
 interface FeatureCardProps {
@@ -22,11 +24,57 @@ export const renderFeatureValue = (value: boolean | string) => {
 };
 
 const FeatureCard: React.FC<FeatureCardProps> = ({ feature, userPlan }) => {
-  const handleAddFeature = (featureName: string) => {
-    toast({
-      title: "Feature request submitted",
-      description: `Your request to add ${featureName} has been sent to our team.`,
-    });
+  const { user } = useAuth();
+  const supabase = useSupabaseClient();
+  const [isLoading, setIsLoading] = useState(false);
+  
+  const handleAddFeature = async (featureName: string) => {
+    if (!user) {
+      toast({
+        title: "Login required",
+        description: "Please log in to subscribe to features",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    setIsLoading(true);
+    try {
+      // Call Stripe checkout function
+      const { data, error } = await supabase.functions.invoke('create-checkout', {
+        body: { 
+          featureName,
+          priceId: `price_${featureName.toLowerCase().replace(/[^a-z0-9]/g, '')}`
+        }
+      });
+      
+      if (error) throw error;
+      
+      // Redirect to Stripe checkout
+      if (data?.url) {
+        window.location.href = data.url;
+      }
+      
+    } catch (error) {
+      console.error("Error creating checkout session:", error);
+      toast({
+        title: "Subscription Error",
+        description: "Failed to initiate subscription process. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const implementFeature = () => {
+    if (feature.implementation && feature.scriptSnippet) {
+      navigator.clipboard.writeText(feature.scriptSnippet);
+      toast({
+        title: "Code copied to clipboard",
+        description: "Implementation code copied to clipboard",
+      });
+    }
   };
 
   return (
@@ -121,14 +169,16 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ feature, userPlan }) => {
           <Button 
             className="w-full bg-forest-500 hover:bg-forest-600" 
             onClick={() => handleAddFeature(feature.name)}
+            disabled={isLoading}
           >
-            Add to My Plan
+            {isLoading ? "Processing..." : "Subscribe to Feature"}
           </Button>
         ) : (
           <Button 
             variant="outline" 
             className="w-full" 
             disabled={!feature.implementation}
+            onClick={implementFeature}
           >
             {feature.implementation ? "Implement Now" : "Included in Your Plan"}
           </Button>
