@@ -197,7 +197,7 @@ const Index = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1">
               <h3 className="text-2xl font-bold text-forest-900 dark:text-white mb-4">
-                Alex Morgan
+                Fernando Ramalho
               </h3>
               <p className="text-forest-700 dark:text-forest-200 italic mb-6">
                 "I founded LeadShield after experiencing the frustration of wasted time and resources on fraudulent leads in my previous business. I knew there had to be a better way to protect companies from this common problem."
