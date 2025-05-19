@@ -1,8 +1,7 @@
-
 import React from "react";
-import { Shield, Briefcase } from "lucide-react";
+import { Briefcase } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import PublicNavbar from "@/components/layout/PublicNavbar";
 
 const Careers = () => {
   // Mock open positions
@@ -40,30 +39,7 @@ const Careers = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-forest-900">
       {/* Header/Navigation */}
-      <header className="bg-white dark:bg-forest-900 border-b border-forest-100 dark:border-forest-800 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <div className="flex items-center space-x-2">
-              <Link to="/">
-                <div className="flex items-center space-x-2">
-                  <Shield className="h-8 w-8 text-forest-500" />
-                  <span className="font-bold text-xl text-forest-900 dark:text-white">LeadShield</span>
-                </div>
-              </Link>
-            </div>
-            <div className="flex items-center space-x-4">
-              <Link to="/login">
-                <Button variant="outline">Log In</Button>
-              </Link>
-              <Link to="/login?tab=signup">
-                <Button className="bg-forest-500 hover:bg-forest-600 dark:bg-forest-500 dark:hover:bg-forest-600">
-                  Sign Up Free
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </header>
+      <PublicNavbar />
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -108,7 +84,7 @@ const Careers = () => {
                 <div className="flex items-start">
                   <div className="bg-forest-100 dark:bg-forest-700 rounded-full p-2 mr-4">
                     <svg className="h-5 w-5 text-forest-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 01-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                     </svg>
                   </div>
                   <div>

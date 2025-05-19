@@ -1,37 +1,11 @@
-
 import React from "react";
-import { Shield } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import PublicNavbar from "@/components/layout/PublicNavbar";
 
 const About = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-forest-900">
       {/* Header/Navigation */}
-      <header className="bg-white dark:bg-forest-900 border-b border-forest-100 dark:border-forest-800 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <div className="flex items-center space-x-2">
-              <Link to="/">
-                <div className="flex items-center space-x-2">
-                  <Shield className="h-8 w-8 text-forest-500" />
-                  <span className="font-bold text-xl text-forest-900 dark:text-white">LeadShield</span>
-                </div>
-              </Link>
-            </div>
-            <div className="flex items-center space-x-4">
-              <Link to="/login">
-                <Button variant="outline">Log In</Button>
-              </Link>
-              <Link to="/login?tab=signup">
-                <Button className="bg-forest-500 hover:bg-forest-600 dark:bg-forest-500 dark:hover:bg-forest-600">
-                  Sign Up Free
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </header>
+      <PublicNavbar />
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
