@@ -9,7 +9,7 @@ interface FeaturesFiltersProps {
 
 const FeaturesFilters: React.FC<FeaturesFiltersProps> = ({ activeTab, onTabChange }) => {
   return (
-    <Tabs defaultValue={activeTab} className="w-full sm:w-auto" onValueChange={onTabChange}>
+    <Tabs value={activeTab} onValueChange={onTabChange} className="w-full sm:w-auto">
       <TabsList>
         <TabsTrigger value="all">All Features</TabsTrigger>
         <TabsTrigger value="included">Included in Plan</TabsTrigger>
