@@ -1,5 +1,7 @@
+
 import React from "react";
 import PublicNavbar from "@/components/layout/PublicNavbar";
+import { Shield } from "lucide-react";
 
 const About = () => {
   return (
