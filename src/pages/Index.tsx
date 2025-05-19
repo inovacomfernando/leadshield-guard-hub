@@ -231,7 +231,7 @@ const Index = () => {
                 <div className="aspect-square bg-forest-200 dark:bg-forest-600 animate-pulse-soft"></div>
                 <div className="p-4 bg-white dark:bg-forest-700">
                   <p className="text-center text-forest-500 font-medium">
-                    Alex Morgan, Founder & CEO
+                    Fernando Ramalho, Founder & CEO
                   </p>
                 </div>
               </div>
