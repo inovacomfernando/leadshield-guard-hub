@@ -204,11 +204,11 @@ const Index = () => {
               </p>
               
               <p className="text-forest-600 dark:text-forest-300 mb-4">
-                With over 15 years of experience in digital marketing and lead generation, Alex identified a critical gap in the market: the lack of robust tools to identify and prevent fraudulent leads before they waste valuable time and resources.
+                With over 8 years of experience in marketing and lead generation, Fernando identified a critical gap in the market: the lack of robust tools to detect and prevent fraudulent leads before they waste valuable time and resources.
               </p>
               
               <p className="text-forest-600 dark:text-forest-300 mb-6">
-                Since launching LeadShield in 2023, Alex has led the company to protect thousands of businesses worldwide, helping them save time, money, and focus on genuine growth opportunities.
+                Since launching LeadShield, Fernando has led the company in protecting thousands of businesses around the world, helping them save time, money, and focus on genuine growth opportunities.
               </p>
               
               <div className="flex space-x-4">
