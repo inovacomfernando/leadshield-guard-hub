@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import { Shield, CheckCircle, ChevronRight, ArrowRight, Users, Settings, CreditCard, Instagram, Youtube } from "lucide-react";
@@ -27,9 +26,15 @@ const Index = () => {
                 <a href="#pricing" className="text-forest-700 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">
                   Pricing
                 </a>
-                <a href="#about" className="text-forest-700 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">
+                <Link to="/about" className="text-forest-700 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">
                   About
-                </a>
+                </Link>
+                <Link to="/blog" className="text-forest-700 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">
+                  Blog
+                </Link>
+                <Link to="/contact" className="text-forest-700 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">
+                  Contact
+                </Link>
               </nav>
               <DarkModeToggle />
               <Link to="/login">
@@ -179,8 +184,73 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Founder Section */}
+      <section id="about" className="py-20 bg-forest-50 dark:bg-forest-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-forest-900 dark:text-white">Meet Our Founder</h2>
+            <p className="mt-4 text-lg text-forest-600 dark:text-forest-300">
+              The story behind LeadShield
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="order-2 md:order-1">
+              <h3 className="text-2xl font-bold text-forest-900 dark:text-white mb-4">
+                Alex Morgan
+              </h3>
+              <p className="text-forest-700 dark:text-forest-200 italic mb-6">
+                "I founded LeadShield after experiencing the frustration of wasted time and resources on fraudulent leads in my previous business. I knew there had to be a better way to protect companies from this common problem."
+              </p>
+              
+              <p className="text-forest-600 dark:text-forest-300 mb-4">
+                With over 15 years of experience in digital marketing and lead generation, Alex identified a critical gap in the market: the lack of robust tools to identify and prevent fraudulent leads before they waste valuable time and resources.
+              </p>
+              
+              <p className="text-forest-600 dark:text-forest-300 mb-6">
+                Since launching LeadShield in 2023, Alex has led the company to protect thousands of businesses worldwide, helping them save time, money, and focus on genuine growth opportunities.
+              </p>
+              
+              <div className="flex space-x-4">
+                <a href="#" className="text-forest-500 hover:text-forest-700 dark:hover:text-forest-300">
+                  <span className="sr-only">LinkedIn</span>
+                  <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                  </svg>
+                </a>
+                <a href="#" className="text-forest-500 hover:text-forest-700 dark:hover:text-forest-300">
+                  <span className="sr-only">Twitter</span>
+                  <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div className="order-1 md:order-2">
+              <div className="bg-white dark:bg-forest-700 rounded-xl shadow-xl overflow-hidden border border-forest-100 dark:border-forest-600">
+                <div className="aspect-square bg-forest-200 dark:bg-forest-600 animate-pulse-soft"></div>
+                <div className="p-4 bg-white dark:bg-forest-700">
+                  <p className="text-center text-forest-500 font-medium">
+                    Alex Morgan, Founder & CEO
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-12 text-center">
+            <Link to="/about">
+              <Button variant="outline" className="border-forest-500 text-forest-500">
+                Learn More About Us
+                <ChevronRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Pricing */}
-      <section id="pricing" className="py-20 bg-forest-50 dark:bg-forest-800">
+      <section id="pricing" className="py-20 bg-white dark:bg-forest-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-forest-900 dark:text-white">Pricing Plans</h2>
@@ -391,16 +461,16 @@ const Index = () => {
             <div>
               <h3 className="font-semibold text-forest-900 dark:text-white mb-4">Company</h3>
               <ul className="space-y-2">
-                <li><a href="#about" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">About</a></li>
-                <li><a href="#" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">Blog</a></li>
-                <li><a href="#" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">Careers</a></li>
-                <li><a href="#" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">Contact</a></li>
+                <li><Link to="/about" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">About</Link></li>
+                <li><Link to="/blog" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">Blog</Link></li>
+                <li><Link to="/careers" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">Careers</Link></li>
+                <li><Link to="/contact" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">Contact</Link></li>
               </ul>
             </div>
             <div>
               <h3 className="font-semibold text-forest-900 dark:text-white mb-4">Resources</h3>
               <ul className="space-y-2">
-                <li><a href="#" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">Documentation</a></li>
+                <li><Link to="/documentation" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">Documentation</Link></li>
                 <li><a href="#" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">Support</a></li>
                 <li><a href="#" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">Privacy</a></li>
                 <li><a href="#" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">Terms</a></li>
