@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -24,6 +23,7 @@ import About from "./pages/About";
 import Blog from "./pages/Blog";
 import Careers from "./pages/Careers";
 import Contact from "./pages/Contact";
+import BotManager from "./pages/BotManager";
 
 const queryClient = new QueryClient();
 
@@ -77,7 +77,8 @@ const App = () => (
                 {/* Protected routes */}
                 <Route path="/dashboard" element={<PrivateRoute element={<Dashboard />} />} />
                 <Route path="/leads" element={<PrivateRoute element={<Leads />} />} />
-                <Route path="/settings" element={<PrivateRoute element={<Settings />} />} />
+                <Route path="/settings" element={<Settings />} />
+                <Route path="/bot-manager" element={<BotManager />} />
                 <Route path="/billing" element={<PrivateRoute element={<Billing />} />} />
                 <Route path="/features" element={<PrivateRoute element={<Features />} />} />
 
