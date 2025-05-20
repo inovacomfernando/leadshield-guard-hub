@@ -4,9 +4,12 @@ import { Shield, CheckCircle, ChevronRight, ArrowRight, Users, Settings, CreditC
 import { Button } from "@/components/ui/button";
 import DarkModeToggle from "@/components/layout/DarkModeToggle";
 import { useTheme } from "@/context/ThemeContext";
+import LanguageSwitcher from "@/components/layout/LanguageSwitcher";
+import { useLanguage } from "@/context/LanguageContext";
 
 const Index = () => {
   const { theme } = useTheme();
+  const { t } = useLanguage();
   
   return (
     <div className="min-h-screen flex flex-col">
@@ -16,33 +19,34 @@ const Index = () => {
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-2">
               <Shield className="h-8 w-8 text-forest-500" />
-              <span className="font-bold text-xl text-forest-900 dark:text-white">LeadShield</span>
+              <span className="font-bold text-xl text-forest-900 dark:text-white">{t("app.name")}</span>
             </div>
             <div className="flex items-center space-x-4">
               <nav className="hidden md:flex space-x-6">
                 <a href="#features" className="text-forest-700 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">
-                  Features
+                  {t("nav.features")}
                 </a>
                 <a href="#pricing" className="text-forest-700 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">
-                  Pricing
+                  {t("nav.billing")}
                 </a>
                 <Link to="/about" className="text-forest-700 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">
-                  About
+                  {t("nav.about")}
                 </Link>
                 <Link to="/blog" className="text-forest-700 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">
-                  Blog
+                  {t("nav.blog")}
                 </Link>
                 <Link to="/contact" className="text-forest-700 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">
-                  Contact
+                  {t("nav.contact")}
                 </Link>
               </nav>
+              <LanguageSwitcher />
               <DarkModeToggle />
               <Link to="/login">
-                <Button variant="outline">Log In</Button>
+                <Button variant="outline">{t("nav.login")}</Button>
               </Link>
               <Link to="/login?tab=signup">
                 <Button className="bg-forest-500 hover:bg-forest-600 dark:bg-forest-500 dark:hover:bg-forest-600">
-                  Sign Up Free
+                  {t("nav.signup")}
                 </Button>
               </Link>
             </div>
@@ -56,7 +60,7 @@ const Index = () => {
           <div className="flex flex-col md:flex-row md:items-center md:justify-between">
             <div className="md:w-1/2 mb-10 md:mb-0">
               <h1 className="text-4xl md:text-5xl font-bold text-forest-900 dark:text-white tracking-tight">
-                Protect Your Business from <span className="text-forest-500">Fraudulent Leads</span>
+                {t("app.tagline")}
               </h1>
               <p className="mt-4 text-lg text-forest-700 dark:text-forest-200">
                 LeadShield uses AI-powered scoring to identify and block suspicious leads before they waste your time and resources.
@@ -64,7 +68,7 @@ const Index = () => {
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link to="/login?tab=signup">
                   <Button size="lg" className="bg-forest-500 hover:bg-forest-600">
-                    Get Started Free
+                    {t("nav.signup")}
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
@@ -114,7 +118,7 @@ const Index = () => {
       <section id="features" className="py-20 bg-white dark:bg-forest-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-forest-900 dark:text-white">Powerful Features</h2>
+            <h2 className="text-3xl font-bold text-forest-900 dark:text-white">{t("nav.features")}</h2>
             <p className="mt-4 text-lg text-forest-600 dark:text-forest-300">
               Everything you need to protect your business from fraudulent leads
             </p>
@@ -188,7 +192,7 @@ const Index = () => {
       <section id="about" className="py-20 bg-forest-50 dark:bg-forest-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-forest-900 dark:text-white">Meet Our Founder</h2>
+            <h2 className="text-3xl font-bold text-forest-900 dark:text-white">{t("nav.about")}</h2>
             <p className="mt-4 text-lg text-forest-600 dark:text-forest-300">
               The story behind LeadShield
             </p>
@@ -253,7 +257,7 @@ const Index = () => {
       <section id="pricing" className="py-20 bg-white dark:bg-forest-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-forest-900 dark:text-white">Pricing Plans</h2>
+            <h2 className="text-3xl font-bold text-forest-900 dark:text-white">{t("nav.billing")}</h2>
             <p className="mt-4 text-lg text-forest-600 dark:text-forest-300">
               Choose the perfect plan for your business needs
             </p>
@@ -407,7 +411,7 @@ const Index = () => {
           </p>
           <Link to="/login?tab=signup">
             <Button size="lg" className="bg-forest-500 hover:bg-forest-600">
-              Get Started Free
+              {t("nav.signup")}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>
@@ -421,10 +425,10 @@ const Index = () => {
             <div>
               <div className="flex items-center space-x-2 mb-4">
                 <Shield className="h-6 w-6 text-forest-500" />
-                <span className="font-bold text-lg text-forest-900 dark:text-white">LeadShield</span>
+                <span className="font-bold text-lg text-forest-900 dark:text-white">{t("app.name")}</span>
               </div>
               <p className="text-forest-600 dark:text-forest-300 mb-4">
-                Protecting businesses from fraudulent leads with intelligent scoring.
+                {t("app.tagline")}
               </p>
               <div className="flex space-x-4">
                 <a href="https://instagram.com/leadshield" target="_blank" rel="noopener noreferrer" className="text-forest-500 hover:text-forest-700 dark:hover:text-forest-300">
@@ -450,10 +454,10 @@ const Index = () => {
               </div>
             </div>
             <div>
-              <h3 className="font-semibold text-forest-900 dark:text-white mb-4">Product</h3>
+              <h3 className="font-semibold text-forest-900 dark:text-white mb-4">{t("app.name")}</h3>
               <ul className="space-y-2">
-                <li><a href="#features" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">Features</a></li>
-                <li><a href="#pricing" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">Pricing</a></li>
+                <li><a href="#features" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">{t("nav.features")}</a></li>
+                <li><a href="#pricing" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">{t("nav.billing")}</a></li>
                 <li><a href="#" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">Integrations</a></li>
                 <li><a href="#" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">API</a></li>
               </ul>
@@ -461,10 +465,10 @@ const Index = () => {
             <div>
               <h3 className="font-semibold text-forest-900 dark:text-white mb-4">Company</h3>
               <ul className="space-y-2">
-                <li><Link to="/about" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">About</Link></li>
-                <li><Link to="/blog" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">Blog</Link></li>
-                <li><Link to="/careers" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">Careers</Link></li>
-                <li><Link to="/contact" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">Contact</Link></li>
+                <li><Link to="/about" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">{t("nav.about")}</Link></li>
+                <li><Link to="/blog" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">{t("nav.blog")}</Link></li>
+                <li><Link to="/careers" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">{t("nav.careers")}</Link></li>
+                <li><Link to="/contact" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">{t("nav.contact")}</Link></li>
               </ul>
             </div>
             <div>
