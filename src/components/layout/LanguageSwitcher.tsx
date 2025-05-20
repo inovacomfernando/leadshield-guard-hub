@@ -21,12 +21,14 @@ const languages = [
 const LanguageSwitcher = () => {
   const { language, setLanguage } = useLanguage();
 
+  const currentLanguageName = languages.find(lang => lang.code === language)?.name || 'English';
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className="relative">
+        <Button variant="ghost" size="icon" className="relative flex items-center gap-2">
           <Globe className="h-5 w-5" />
-          <span className="sr-only">Change Language</span>
+          <span className="sr-only md:not-sr-only md:inline-block text-xs">{currentLanguageName}</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="min-w-[8rem]">

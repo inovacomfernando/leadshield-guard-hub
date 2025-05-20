@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Link } from "react-router-dom";
 import { Shield, CheckCircle, ChevronRight, ArrowRight, Users, Settings, CreditCard, Instagram, Youtube } from "lucide-react";
@@ -63,7 +64,7 @@ const Index = () => {
                 {t("app.tagline")}
               </h1>
               <p className="mt-4 text-lg text-forest-700 dark:text-forest-200">
-                LeadShield uses AI-powered scoring to identify and block suspicious leads before they waste your time and resources.
+                {t("home.hero.subtitle")}
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link to="/login?tab=signup">
@@ -74,17 +75,17 @@ const Index = () => {
                 </Link>
                 <a href="#features">
                   <Button variant="outline" size="lg">
-                    Learn More
+                    {t("home.hero.cta.learn")}
                     <ChevronRight className="ml-2 h-4 w-4" />
                   </Button>
                 </a>
               </div>
               <div className="mt-6 flex items-center">
                 <CheckCircle className="h-5 w-5 text-forest-500" />
-                <span className="ml-2 text-sm text-forest-700 dark:text-forest-300">No credit card required</span>
+                <span className="ml-2 text-sm text-forest-700 dark:text-forest-300">{t("home.hero.benefits.nocredit")}</span>
                 <span className="mx-2 text-forest-400">•</span>
                 <CheckCircle className="h-5 w-5 text-forest-500" />
-                <span className="ml-2 text-sm text-forest-700 dark:text-forest-300">Cancel anytime</span>
+                <span className="ml-2 text-sm text-forest-700 dark:text-forest-300">{t("home.hero.benefits.cancel")}</span>
               </div>
             </div>
             <div className="md:w-1/2">
@@ -105,8 +106,8 @@ const Index = () => {
                   </div>
                 </div>
                 <div className="px-6 py-4 bg-forest-50 dark:bg-forest-700/50 border-t border-forest-100 dark:border-forest-700 flex justify-between items-center">
-                  <span className="text-sm text-forest-500 font-medium">Lead Shield Dashboard</span>
-                  <span className="text-xs text-forest-400 dark:text-forest-500">Real-time protection</span>
+                  <span className="text-sm text-forest-500 font-medium">{t("home.hero.dashboard")}</span>
+                  <span className="text-xs text-forest-400 dark:text-forest-500">{t("home.hero.realtime")}</span>
                 </div>
               </div>
             </div>
@@ -120,7 +121,7 @@ const Index = () => {
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-forest-900 dark:text-white">{t("nav.features")}</h2>
             <p className="mt-4 text-lg text-forest-600 dark:text-forest-300">
-              Everything you need to protect your business from fraudulent leads
+              {t("home.features.subtitle")}
             </p>
           </div>
 
@@ -129,9 +130,9 @@ const Index = () => {
               <div className="bg-forest-100 dark:bg-forest-700 rounded-full w-12 h-12 flex items-center justify-center mb-4">
                 <Shield className="h-6 w-6 text-forest-500" />
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-forest-900 dark:text-white">Intelligent Scoring</h3>
+              <h3 className="text-xl font-semibold mb-2 text-forest-900 dark:text-white">{t("home.features.scoring.title")}</h3>
               <p className="text-forest-600 dark:text-forest-300">
-                Our AI-powered algorithm analyzes multiple data points to assign a risk score to each lead.
+                {t("home.features.scoring.desc")}
               </p>
             </div>
 
@@ -139,9 +140,9 @@ const Index = () => {
               <div className="bg-forest-100 dark:bg-forest-700 rounded-full w-12 h-12 flex items-center justify-center mb-4">
                 <Settings className="h-6 w-6 text-forest-500" />
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-forest-900 dark:text-white">Custom Rules</h3>
+              <h3 className="text-xl font-semibold mb-2 text-forest-900 dark:text-white">{t("home.features.rules.title")}</h3>
               <p className="text-forest-600 dark:text-forest-300">
-                Create and customize scoring rules based on your unique business needs and requirements.
+                {t("home.features.rules.desc")}
               </p>
             </div>
 
@@ -149,9 +150,9 @@ const Index = () => {
               <div className="bg-forest-100 dark:bg-forest-700 rounded-full w-12 h-12 flex items-center justify-center mb-4">
                 <Users className="h-6 w-6 text-forest-500" />
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-forest-900 dark:text-white">Team Collaboration</h3>
+              <h3 className="text-xl font-semibold mb-2 text-forest-900 dark:text-white">{t("home.features.team.title")}</h3>
               <p className="text-forest-600 dark:text-forest-300">
-                Add team members with different roles and permissions to manage leads collectively.
+                {t("home.features.team.desc")}
               </p>
             </div>
 
@@ -159,9 +160,9 @@ const Index = () => {
               <div className="bg-forest-100 dark:bg-forest-700 rounded-full w-12 h-12 flex items-center justify-center mb-4">
                 <CreditCard className="h-6 w-6 text-forest-500" />
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-forest-900 dark:text-white">Flexible Billing</h3>
+              <h3 className="text-xl font-semibold mb-2 text-forest-900 dark:text-white">{t("home.features.billing.title")}</h3>
               <p className="text-forest-600 dark:text-forest-300">
-                Choose between monthly and annual billing with plans that scale as your business grows.
+                {t("home.features.billing.desc")}
               </p>
             </div>
 
@@ -169,9 +170,9 @@ const Index = () => {
               <div className="bg-forest-100 dark:bg-forest-700 rounded-full w-12 h-12 flex items-center justify-center mb-4">
                 <CheckCircle className="h-6 w-6 text-forest-500" />
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-forest-900 dark:text-white">Real-time Protection</h3>
+              <h3 className="text-xl font-semibold mb-2 text-forest-900 dark:text-white">{t("home.features.protection.title")}</h3>
               <p className="text-forest-600 dark:text-forest-300">
-                Identify and block suspicious leads in real-time before they enter your sales funnel.
+                {t("home.features.protection.desc")}
               </p>
             </div>
 
@@ -179,9 +180,9 @@ const Index = () => {
               <div className="bg-forest-100 dark:bg-forest-700 rounded-full w-12 h-12 flex items-center justify-center mb-4">
                 <ArrowRight className="h-6 w-6 text-forest-500" />
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-forest-900 dark:text-white">API Integration</h3>
+              <h3 className="text-xl font-semibold mb-2 text-forest-900 dark:text-white">{t("home.features.api.title")}</h3>
               <p className="text-forest-600 dark:text-forest-300">
-                Seamlessly integrate with your existing CRM, marketing tools, and other software systems.
+                {t("home.features.api.desc")}
               </p>
             </div>
           </div>
@@ -194,25 +195,25 @@ const Index = () => {
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-forest-900 dark:text-white">{t("nav.about")}</h2>
             <p className="mt-4 text-lg text-forest-600 dark:text-forest-300">
-              The story behind LeadShield
+              {t("home.about.subtitle")}
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1">
               <h3 className="text-2xl font-bold text-forest-900 dark:text-white mb-4">
-                Fernando Ramalho
+                {t("home.about.name")}
               </h3>
               <p className="text-forest-700 dark:text-forest-200 italic mb-6">
-                "I founded LeadShield after experiencing the frustration of wasted time and resources on fraudulent leads in my previous business. I knew there had to be a better way to protect companies from this common problem."
+                {t("home.about.quote")}
               </p>
               
               <p className="text-forest-600 dark:text-forest-300 mb-4">
-                With over 8 years of experience in marketing and lead generation, Fernando identified a critical gap in the market: the lack of robust tools to detect and prevent fraudulent leads before they waste valuable time and resources.
+                {t("home.about.bio1")}
               </p>
               
               <p className="text-forest-600 dark:text-forest-300 mb-6">
-                Since launching LeadShield, Fernando has led the company in protecting thousands of businesses around the world, helping them save time, money, and focus on genuine growth opportunities.
+                {t("home.about.bio2")}
               </p>
               
               <div className="flex space-x-4">
@@ -235,7 +236,7 @@ const Index = () => {
                 <div className="aspect-square bg-forest-200 dark:bg-forest-600 animate-pulse-soft"></div>
                 <div className="p-4 bg-white dark:bg-forest-700">
                   <p className="text-center text-forest-500 font-medium">
-                    Fernando Ramalho, Founder & CEO
+                    {t("home.about.role")}
                   </p>
                 </div>
               </div>
@@ -245,7 +246,7 @@ const Index = () => {
           <div className="mt-12 text-center">
             <Link to="/about">
               <Button variant="outline" className="border-forest-500 text-forest-500">
-                Learn More About Us
+                {t("home.about.cta")}
                 <ChevronRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
@@ -259,7 +260,7 @@ const Index = () => {
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-forest-900 dark:text-white">{t("nav.billing")}</h2>
             <p className="mt-4 text-lg text-forest-600 dark:text-forest-300">
-              Choose the perfect plan for your business needs
+              {t("home.pricing.subtitle")}
             </p>
           </div>
 
@@ -267,30 +268,30 @@ const Index = () => {
             {/* Free Plan */}
             <div className="bg-white dark:bg-forest-900 rounded-lg overflow-hidden shadow-lg border border-forest-100 dark:border-forest-700 hover-scale">
               <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2 text-forest-900 dark:text-white">Free</h3>
+                <h3 className="text-xl font-semibold mb-2 text-forest-900 dark:text-white">{t("home.pricing.free.name")}</h3>
                 <div className="mb-4">
                   <span className="text-4xl font-bold text-forest-900 dark:text-white">$0</span>
                   <span className="text-forest-600 dark:text-forest-300">/mo</span>
                 </div>
-                <p className="text-forest-600 dark:text-forest-300 mb-6">Get started with basic lead protection</p>
+                <p className="text-forest-600 dark:text-forest-300 mb-6">{t("home.pricing.free.desc")}</p>
                 <ul className="space-y-3 mb-6">
                   <li className="flex items-start">
                     <CheckCircle className="h-5 w-5 text-forest-500 mr-2 mt-0.5 shrink-0" />
-                    <span className="text-forest-700 dark:text-forest-200">Up to 100 leads/month</span>
+                    <span className="text-forest-700 dark:text-forest-200">{t("home.pricing.free.feature1")}</span>
                   </li>
                   <li className="flex items-start">
                     <CheckCircle className="h-5 w-5 text-forest-500 mr-2 mt-0.5 shrink-0" />
-                    <span className="text-forest-700 dark:text-forest-200">Basic lead scoring</span>
+                    <span className="text-forest-700 dark:text-forest-200">{t("home.pricing.free.feature2")}</span>
                   </li>
                   <li className="flex items-start">
                     <CheckCircle className="h-5 w-5 text-forest-500 mr-2 mt-0.5 shrink-0" />
-                    <span className="text-forest-700 dark:text-forest-200">Email support</span>
+                    <span className="text-forest-700 dark:text-forest-200">{t("home.pricing.free.feature3")}</span>
                   </li>
                 </ul>
               </div>
               <div className="px-6 pb-6">
                 <Link to="/login?tab=signup">
-                  <Button className="w-full bg-forest-500 hover:bg-forest-600">Sign Up Free</Button>
+                  <Button className="w-full bg-forest-500 hover:bg-forest-600">{t("nav.signup")}</Button>
                 </Link>
               </div>
             </div>
@@ -298,30 +299,30 @@ const Index = () => {
             {/* Start Plan */}
             <div className="bg-white dark:bg-forest-900 rounded-lg overflow-hidden shadow-lg border border-forest-100 dark:border-forest-700 hover-scale">
               <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2 text-forest-900 dark:text-white">Start</h3>
+                <h3 className="text-xl font-semibold mb-2 text-forest-900 dark:text-white">{t("home.pricing.start.name")}</h3>
                 <div className="mb-4">
                   <span className="text-4xl font-bold text-forest-900 dark:text-white">$49</span>
                   <span className="text-forest-600 dark:text-forest-300">/mo</span>
                 </div>
-                <p className="text-forest-600 dark:text-forest-300 mb-6">Protection for growing businesses</p>
+                <p className="text-forest-600 dark:text-forest-300 mb-6">{t("home.pricing.start.desc")}</p>
                 <ul className="space-y-3 mb-6">
                   <li className="flex items-start">
                     <CheckCircle className="h-5 w-5 text-forest-500 mr-2 mt-0.5 shrink-0" />
-                    <span className="text-forest-700 dark:text-forest-200">Up to 500 leads/month</span>
+                    <span className="text-forest-700 dark:text-forest-200">{t("home.pricing.start.feature1")}</span>
                   </li>
                   <li className="flex items-start">
                     <CheckCircle className="h-5 w-5 text-forest-500 mr-2 mt-0.5 shrink-0" />
-                    <span className="text-forest-700 dark:text-forest-200">Custom scoring rules (2)</span>
+                    <span className="text-forest-700 dark:text-forest-200">{t("home.pricing.start.feature2")}</span>
                   </li>
                   <li className="flex items-start">
                     <CheckCircle className="h-5 w-5 text-forest-500 mr-2 mt-0.5 shrink-0" />
-                    <span className="text-forest-700 dark:text-forest-200">Team members (2)</span>
+                    <span className="text-forest-700 dark:text-forest-200">{t("home.pricing.start.feature3")}</span>
                   </li>
                 </ul>
               </div>
               <div className="px-6 pb-6">
                 <Link to="/login?tab=signup">
-                  <Button className="w-full bg-forest-500 hover:bg-forest-600">Get Started</Button>
+                  <Button className="w-full bg-forest-500 hover:bg-forest-600">{t("home.pricing.cta")}</Button>
                 </Link>
               </div>
             </div>
@@ -329,37 +330,37 @@ const Index = () => {
             {/* Growth Plan */}
             <div className="bg-white dark:bg-forest-900 rounded-lg overflow-hidden shadow-xl border-2 border-forest-500 hover-scale relative">
               <div className="bg-forest-500 text-white text-center text-sm py-1">
-                Most Popular
+                {t("home.pricing.growth.tag")}
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2 text-forest-900 dark:text-white">Growth</h3>
+                <h3 className="text-xl font-semibold mb-2 text-forest-900 dark:text-white">{t("home.pricing.growth.name")}</h3>
                 <div className="mb-4">
                   <span className="text-4xl font-bold text-forest-900 dark:text-white">$99</span>
                   <span className="text-forest-600 dark:text-forest-300">/mo</span>
                 </div>
-                <p className="text-forest-600 dark:text-forest-300 mb-6">Advanced protection & analytics</p>
+                <p className="text-forest-600 dark:text-forest-300 mb-6">{t("home.pricing.growth.desc")}</p>
                 <ul className="space-y-3 mb-6">
                   <li className="flex items-start">
                     <CheckCircle className="h-5 w-5 text-forest-500 mr-2 mt-0.5 shrink-0" />
-                    <span className="text-forest-700 dark:text-forest-200">Up to 2,000 leads/month</span>
+                    <span className="text-forest-700 dark:text-forest-200">{t("home.pricing.growth.feature1")}</span>
                   </li>
                   <li className="flex items-start">
                     <CheckCircle className="h-5 w-5 text-forest-500 mr-2 mt-0.5 shrink-0" />
-                    <span className="text-forest-700 dark:text-forest-200">Custom scoring rules (5)</span>
+                    <span className="text-forest-700 dark:text-forest-200">{t("home.pricing.growth.feature2")}</span>
                   </li>
                   <li className="flex items-start">
                     <CheckCircle className="h-5 w-5 text-forest-500 mr-2 mt-0.5 shrink-0" />
-                    <span className="text-forest-700 dark:text-forest-200">Team members (5)</span>
+                    <span className="text-forest-700 dark:text-forest-200">{t("home.pricing.growth.feature3")}</span>
                   </li>
                   <li className="flex items-start">
                     <CheckCircle className="h-5 w-5 text-forest-500 mr-2 mt-0.5 shrink-0" />
-                    <span className="text-forest-700 dark:text-forest-200">Advanced analytics</span>
+                    <span className="text-forest-700 dark:text-forest-200">{t("home.pricing.growth.feature4")}</span>
                   </li>
                 </ul>
               </div>
               <div className="px-6 pb-6">
                 <Link to="/login?tab=signup">
-                  <Button className="w-full bg-forest-500 hover:bg-forest-600">Get Started</Button>
+                  <Button className="w-full bg-forest-500 hover:bg-forest-600">{t("home.pricing.cta")}</Button>
                 </Link>
               </div>
             </div>
@@ -367,34 +368,34 @@ const Index = () => {
             {/* Full Plan */}
             <div className="bg-white dark:bg-forest-900 rounded-lg overflow-hidden shadow-lg border border-forest-100 dark:border-forest-700 hover-scale">
               <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2 text-forest-900 dark:text-white">Full Shield</h3>
+                <h3 className="text-xl font-semibold mb-2 text-forest-900 dark:text-white">{t("home.pricing.full.name")}</h3>
                 <div className="mb-4">
                   <span className="text-4xl font-bold text-forest-900 dark:text-white">$249</span>
                   <span className="text-forest-600 dark:text-forest-300">/mo</span>
                 </div>
-                <p className="text-forest-600 dark:text-forest-300 mb-6">Enterprise-grade protection</p>
+                <p className="text-forest-600 dark:text-forest-300 mb-6">{t("home.pricing.full.desc")}</p>
                 <ul className="space-y-3 mb-6">
                   <li className="flex items-start">
                     <CheckCircle className="h-5 w-5 text-forest-500 mr-2 mt-0.5 shrink-0" />
-                    <span className="text-forest-700 dark:text-forest-200">Unlimited leads</span>
+                    <span className="text-forest-700 dark:text-forest-200">{t("home.pricing.full.feature1")}</span>
                   </li>
                   <li className="flex items-start">
                     <CheckCircle className="h-5 w-5 text-forest-500 mr-2 mt-0.5 shrink-0" />
-                    <span className="text-forest-700 dark:text-forest-200">Unlimited custom rules</span>
+                    <span className="text-forest-700 dark:text-forest-200">{t("home.pricing.full.feature2")}</span>
                   </li>
                   <li className="flex items-start">
                     <CheckCircle className="h-5 w-5 text-forest-500 mr-2 mt-0.5 shrink-0" />
-                    <span className="text-forest-700 dark:text-forest-200">Unlimited team members</span>
+                    <span className="text-forest-700 dark:text-forest-200">{t("home.pricing.full.feature3")}</span>
                   </li>
                   <li className="flex items-start">
                     <CheckCircle className="h-5 w-5 text-forest-500 mr-2 mt-0.5 shrink-0" />
-                    <span className="text-forest-700 dark:text-forest-200">24/7 priority support</span>
+                    <span className="text-forest-700 dark:text-forest-200">{t("home.pricing.full.feature4")}</span>
                   </li>
                 </ul>
               </div>
               <div className="px-6 pb-6">
                 <Link to="/login?tab=signup">
-                  <Button className="w-full bg-forest-500 hover:bg-forest-600">Get Started</Button>
+                  <Button className="w-full bg-forest-500 hover:bg-forest-600">{t("home.pricing.cta")}</Button>
                 </Link>
               </div>
             </div>
@@ -405,9 +406,9 @@ const Index = () => {
       {/* CTA */}
       <section className="py-20 bg-forest-900 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to protect your business?</h2>
+          <h2 className="text-3xl font-bold mb-4">{t("home.cta.title")}</h2>
           <p className="text-lg text-forest-300 mb-8">
-            Start using LeadShield today and stop wasting time and resources on fraudulent leads.
+            {t("home.cta.subtitle")}
           </p>
           <Link to="/login?tab=signup">
             <Button size="lg" className="bg-forest-500 hover:bg-forest-600">
@@ -463,7 +464,7 @@ const Index = () => {
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold text-forest-900 dark:text-white mb-4">Company</h3>
+              <h3 className="font-semibold text-forest-900 dark:text-white mb-4">{t("footer.company")}</h3>
               <ul className="space-y-2">
                 <li><Link to="/about" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">{t("nav.about")}</Link></li>
                 <li><Link to="/blog" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">{t("nav.blog")}</Link></li>
@@ -472,18 +473,18 @@ const Index = () => {
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold text-forest-900 dark:text-white mb-4">Resources</h3>
+              <h3 className="font-semibold text-forest-900 dark:text-white mb-4">{t("footer.resources")}</h3>
               <ul className="space-y-2">
-                <li><Link to="/documentation" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">Documentation</Link></li>
-                <li><a href="#" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">Support</a></li>
-                <li><a href="#" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">Privacy</a></li>
-                <li><a href="#" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">Terms</a></li>
+                <li><Link to="/documentation" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">{t("footer.docs")}</Link></li>
+                <li><a href="#" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">{t("footer.support")}</a></li>
+                <li><a href="#" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">{t("footer.privacy")}</a></li>
+                <li><a href="#" className="text-forest-600 dark:text-forest-300 hover:text-forest-500 dark:hover:text-forest-500">{t("footer.terms")}</a></li>
               </ul>
             </div>
           </div>
           <div className="mt-8 pt-8 border-t border-forest-100 dark:border-forest-800">
             <p className="text-forest-600 dark:text-forest-300 text-center">
-              &copy; {new Date().getFullYear()} LeadShield. All rights reserved.
+              &copy; {new Date().getFullYear()} LeadShield. {t("footer.copyright")}
             </p>
           </div>
         </div>

@@ -2,6 +2,7 @@
 import React from "react";
 import { ArrowUp, ArrowDown } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface LeadMetricsCardProps {
   title: string;
@@ -19,11 +20,17 @@ const LeadMetricsCard: React.FC<LeadMetricsCardProps> = ({
   description,
 }) => {
   const isPositive = changePercentage >= 0;
+  const { language } = useLanguage();
+  
+  // Preserve the original color for "Leads Fraudulentos" in Portuguese
+  const titleClass = language === 'pt' && title.includes('Fraudulentos') 
+    ? "text-sm font-medium text-[#8E9196]" 
+    : "text-sm font-medium";
 
   return (
     <Card className="glass-card hover-scale">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium">{title}</CardTitle>
+        <CardTitle className={titleClass}>{title}</CardTitle>
         <div className="h-8 w-8 rounded-full bg-forest-100 dark:bg-forest-800 flex items-center justify-center">
           {icon}
         </div>
