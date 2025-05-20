@@ -1,38 +1,42 @@
+
 import React from "react";
 import { Briefcase } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PublicNavbar from "@/components/layout/PublicNavbar";
+import { useLanguage } from "@/context/LanguageContext";
 
 const Careers = () => {
+  const { t } = useLanguage();
+  
   // Mock open positions
   const openPositions = [
     {
       id: 1,
-      title: "Senior Frontend Developer",
-      department: "Engineering",
-      location: "San Francisco, CA (Remote Available)",
-      type: "Full-time"
+      title: t("careers.positions.frontend.title"),
+      department: t("careers.departments.engineering"),
+      location: t("careers.locations.sf_remote"),
+      type: t("careers.job_types.fulltime")
     },
     {
       id: 2,
-      title: "Machine Learning Engineer",
-      department: "Data Science",
-      location: "San Francisco, CA (Remote Available)",
-      type: "Full-time"
+      title: t("careers.positions.ml.title"),
+      department: t("careers.departments.data_science"),
+      location: t("careers.locations.sf_remote"),
+      type: t("careers.job_types.fulltime")
     },
     {
       id: 3,
-      title: "Customer Success Manager",
-      department: "Customer Support",
-      location: "Remote",
-      type: "Full-time"
+      title: t("careers.positions.csm.title"),
+      department: t("careers.departments.support"),
+      location: t("careers.locations.remote"),
+      type: t("careers.job_types.fulltime")
     },
     {
       id: 4,
-      title: "Content Marketing Specialist",
-      department: "Marketing",
-      location: "Remote",
-      type: "Full-time"
+      title: t("careers.positions.marketing.title"),
+      department: t("careers.departments.marketing"),
+      location: t("careers.locations.remote"),
+      type: t("careers.job_types.fulltime")
     }
   ];
 
@@ -44,9 +48,9 @@ const Careers = () => {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-forest-900 dark:text-white mb-4">Join Our Team</h1>
+          <h1 className="text-4xl font-bold text-forest-900 dark:text-white mb-4">{t("careers.title")}</h1>
           <p className="text-lg text-forest-600 dark:text-forest-300 max-w-3xl mx-auto">
-            Help us build the future of lead management and fraud prevention.
+            {t("careers.subtitle")}
           </p>
         </div>
 
@@ -55,7 +59,7 @@ const Careers = () => {
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="bg-forest-50 dark:bg-forest-800 rounded-lg aspect-square"></div>
             <div>
-              <h2 className="text-2xl font-bold text-forest-900 dark:text-white mb-6">Why Join LeadShield?</h2>
+              <h2 className="text-2xl font-bold text-forest-900 dark:text-white mb-6">{t("careers.why_join.title")}</h2>
               <div className="space-y-4">
                 <div className="flex items-start">
                   <div className="bg-forest-100 dark:bg-forest-700 rounded-full p-2 mr-4">
@@ -64,8 +68,8 @@ const Careers = () => {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="text-lg font-medium text-forest-900 dark:text-white">Meaningful Work</h3>
-                    <p className="text-forest-600 dark:text-forest-300">Help businesses save time and resources by protecting them from fraudulent leads.</p>
+                    <h3 className="text-lg font-medium text-forest-900 dark:text-white">{t("careers.why_join.meaningful.title")}</h3>
+                    <p className="text-forest-600 dark:text-forest-300">{t("careers.why_join.meaningful.desc")}</p>
                   </div>
                 </div>
 
@@ -76,8 +80,8 @@ const Careers = () => {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="text-lg font-medium text-forest-900 dark:text-white">Growth and Learning</h3>
-                    <p className="text-forest-600 dark:text-forest-300">We invest in our employees' professional development with ongoing training and education.</p>
+                    <h3 className="text-lg font-medium text-forest-900 dark:text-white">{t("careers.why_join.growth.title")}</h3>
+                    <p className="text-forest-600 dark:text-forest-300">{t("careers.why_join.growth.desc")}</p>
                   </div>
                 </div>
 
@@ -88,8 +92,8 @@ const Careers = () => {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="text-lg font-medium text-forest-900 dark:text-white">Collaborative Environment</h3>
-                    <p className="text-forest-600 dark:text-forest-300">Work with a talented team that values collaboration, innovation, and diverse perspectives.</p>
+                    <h3 className="text-lg font-medium text-forest-900 dark:text-white">{t("careers.why_join.collaboration.title")}</h3>
+                    <p className="text-forest-600 dark:text-forest-300">{t("careers.why_join.collaboration.desc")}</p>
                   </div>
                 </div>
 
@@ -100,8 +104,8 @@ const Careers = () => {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="text-lg font-medium text-forest-900 dark:text-white">Competitive Benefits</h3>
-                    <p className="text-forest-600 dark:text-forest-300">Enjoy competitive salary, health benefits, flexible PTO, and stock options.</p>
+                    <h3 className="text-lg font-medium text-forest-900 dark:text-white">{t("careers.why_join.benefits.title")}</h3>
+                    <p className="text-forest-600 dark:text-forest-300">{t("careers.why_join.benefits.desc")}</p>
                   </div>
                 </div>
               </div>
@@ -111,7 +115,7 @@ const Careers = () => {
 
         {/* Open Positions */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold text-forest-900 dark:text-white mb-6">Open Positions</h2>
+          <h2 className="text-2xl font-bold text-forest-900 dark:text-white mb-6">{t("careers.open_positions")}</h2>
           
           <div className="space-y-4">
             {openPositions.map((position) => (
@@ -125,7 +129,7 @@ const Careers = () => {
                     </span>
                   </div>
                   <Button className="bg-forest-500 hover:bg-forest-600">
-                    <Briefcase className="mr-2 h-4 w-4" /> Apply
+                    <Briefcase className="mr-2 h-4 w-4" /> {t("careers.apply_button")}
                   </Button>
                 </div>
               </div>
@@ -133,16 +137,16 @@ const Careers = () => {
           </div>
           
           <div className="mt-8 text-center">
-            <p className="text-forest-600 dark:text-forest-300 mb-4">Don't see a position that matches your skills?</p>
+            <p className="text-forest-600 dark:text-forest-300 mb-4">{t("careers.no_position")}</p>
             <Button variant="outline" className="border-forest-500 text-forest-500">
-              Submit Open Application
+              {t("careers.open_application")}
             </Button>
           </div>
         </section>
 
         {/* Company Culture */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold text-forest-900 dark:text-white mb-6">Our Culture</h2>
+          <h2 className="text-2xl font-bold text-forest-900 dark:text-white mb-6">{t("careers.culture.title")}</h2>
           
           <div className="grid md:grid-cols-3 gap-6">
             <div className="bg-forest-100 dark:bg-forest-700 h-64 rounded-lg animate-pulse-soft"></div>
@@ -152,7 +156,7 @@ const Careers = () => {
           
           <div className="mt-8">
             <p className="text-forest-700 dark:text-forest-200">
-              At LeadShield, we believe in creating an inclusive environment where everyone feels welcome, valued, and empowered to do their best work. We celebrate diversity and are committed to building a team that represents a variety of backgrounds, perspectives, and skills.
+              {t("careers.culture.description")}
             </p>
           </div>
         </section>
@@ -162,7 +166,7 @@ const Careers = () => {
       <footer className="bg-white dark:bg-forest-900 border-t border-forest-100 dark:border-forest-800 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center text-forest-600 dark:text-forest-300">
-            &copy; {new Date().getFullYear()} LeadShield. All rights reserved.
+            &copy; {new Date().getFullYear()} {t("app.name")}. {t("footer.copyright")}
           </p>
         </div>
       </footer>

@@ -2,8 +2,11 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import PublicNavbar from "@/components/layout/PublicNavbar";
+import { useLanguage } from "@/context/LanguageContext";
 
 const Contact = () => {
+  const { t } = useLanguage();
+  
   return (
     <div className="min-h-screen bg-white dark:bg-forest-900">
       {/* Header/Navigation */}
@@ -12,21 +15,21 @@ const Contact = () => {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-forest-900 dark:text-white mb-4">Contact Us</h1>
+          <h1 className="text-4xl font-bold text-forest-900 dark:text-white mb-4">{t("contact.title")}</h1>
           <p className="text-lg text-forest-600 dark:text-forest-300 max-w-3xl mx-auto">
-            Have questions or need assistance? We're here to help.
+            {t("contact.subtitle")}
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 items-start">
           {/* Contact Form */}
           <div className="bg-white dark:bg-forest-800 p-8 rounded-lg border border-forest-100 dark:border-forest-700 shadow-sm">
-            <h2 className="text-2xl font-bold text-forest-900 dark:text-white mb-6">Send us a message</h2>
+            <h2 className="text-2xl font-bold text-forest-900 dark:text-white mb-6">{t("contact.form.title")}</h2>
             <form className="space-y-6">
               <div className="grid gap-6 md:grid-cols-2">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-forest-700 dark:text-forest-300 mb-1">
-                    Name
+                    {t("contact.form.name")}
                   </label>
                   <input
                     type="text"
@@ -36,7 +39,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-forest-700 dark:text-forest-300 mb-1">
-                    Email
+                    {t("contact.form.email")}
                   </label>
                   <input
                     type="email"
@@ -47,7 +50,7 @@ const Contact = () => {
               </div>
               <div>
                 <label htmlFor="company" className="block text-sm font-medium text-forest-700 dark:text-forest-300 mb-1">
-                  Company
+                  {t("contact.form.company")}
                 </label>
                 <input
                   type="text"
@@ -57,7 +60,7 @@ const Contact = () => {
               </div>
               <div>
                 <label htmlFor="subject" className="block text-sm font-medium text-forest-700 dark:text-forest-300 mb-1">
-                  Subject
+                  {t("contact.form.subject")}
                 </label>
                 <input
                   type="text"
@@ -67,7 +70,7 @@ const Contact = () => {
               </div>
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-forest-700 dark:text-forest-300 mb-1">
-                  Message
+                  {t("contact.form.message")}
                 </label>
                 <textarea
                   id="message"
@@ -76,7 +79,7 @@ const Contact = () => {
                 ></textarea>
               </div>
               <Button className="bg-forest-500 hover:bg-forest-600 w-full">
-                Send Message
+                {t("contact.form.send")}
               </Button>
             </form>
           </div>
@@ -84,9 +87,9 @@ const Contact = () => {
           {/* Contact Information */}
           <div className="space-y-8">
             <div>
-              <h2 className="text-2xl font-bold text-forest-900 dark:text-white mb-4">Get in Touch</h2>
+              <h2 className="text-2xl font-bold text-forest-900 dark:text-white mb-4">{t("contact.get_in_touch")}</h2>
               <p className="text-forest-600 dark:text-forest-300 mb-6">
-                Our team is available Monday through Friday, 9am to 5pm PT.
+                {t("contact.availability")}
               </p>
               <div className="space-y-4">
                 <div className="flex items-start">
@@ -96,7 +99,7 @@ const Contact = () => {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="font-medium text-forest-900 dark:text-white">Email us</h3>
+                    <h3 className="font-medium text-forest-900 dark:text-white">{t("contact.email_us")}</h3>
                     <p className="text-forest-600 dark:text-forest-300">info@leadshield.com</p>
                   </div>
                 </div>
@@ -107,7 +110,7 @@ const Contact = () => {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="font-medium text-forest-900 dark:text-white">Call us</h3>
+                    <h3 className="font-medium text-forest-900 dark:text-white">{t("contact.call_us")}</h3>
                     <p className="text-forest-600 dark:text-forest-300">+1 (555) 123-4567</p>
                   </div>
                 </div>
@@ -119,7 +122,7 @@ const Contact = () => {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="font-medium text-forest-900 dark:text-white">Visit our office</h3>
+                    <h3 className="font-medium text-forest-900 dark:text-white">{t("contact.visit_office")}</h3>
                     <p className="text-forest-600 dark:text-forest-300">
                       123 Market St, Suite 456<br />
                       San Francisco, CA 94105<br />
@@ -131,19 +134,19 @@ const Contact = () => {
             </div>
 
             <div>
-              <h2 className="text-2xl font-bold text-forest-900 dark:text-white mb-4">Frequently Asked Questions</h2>
+              <h2 className="text-2xl font-bold text-forest-900 dark:text-white mb-4">{t("contact.faq.title")}</h2>
               <div className="space-y-4">
                 <div>
-                  <h3 className="font-medium text-forest-900 dark:text-white mb-1">How quickly will I receive a response?</h3>
-                  <p className="text-forest-600 dark:text-forest-300">We aim to respond to all inquiries within 24 business hours.</p>
+                  <h3 className="font-medium text-forest-900 dark:text-white mb-1">{t("contact.faq.response_time.question")}</h3>
+                  <p className="text-forest-600 dark:text-forest-300">{t("contact.faq.response_time.answer")}</p>
                 </div>
                 <div>
-                  <h3 className="font-medium text-forest-900 dark:text-white mb-1">Do you offer demos?</h3>
-                  <p className="text-forest-600 dark:text-forest-300">Yes! You can schedule a personalized demo with our team to see LeadShield in action.</p>
+                  <h3 className="font-medium text-forest-900 dark:text-white mb-1">{t("contact.faq.demos.question")}</h3>
+                  <p className="text-forest-600 dark:text-forest-300">{t("contact.faq.demos.answer")}</p>
                 </div>
                 <div>
-                  <h3 className="font-medium text-forest-900 dark:text-white mb-1">Where can I find pricing information?</h3>
-                  <p className="text-forest-600 dark:text-forest-300">Visit our pricing page or contact our sales team for detailed pricing information.</p>
+                  <h3 className="font-medium text-forest-900 dark:text-white mb-1">{t("contact.faq.pricing.question")}</h3>
+                  <p className="text-forest-600 dark:text-forest-300">{t("contact.faq.pricing.answer")}</p>
                 </div>
               </div>
             </div>
@@ -155,7 +158,7 @@ const Contact = () => {
       <footer className="bg-white dark:bg-forest-900 border-t border-forest-100 dark:border-forest-800 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center text-forest-600 dark:text-forest-300">
-            &copy; {new Date().getFullYear()} LeadShield. All rights reserved.
+            &copy; {new Date().getFullYear()} {t("app.name")}. {t("footer.copyright")}
           </p>
         </div>
       </footer>

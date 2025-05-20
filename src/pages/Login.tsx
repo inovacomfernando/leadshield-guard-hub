@@ -10,11 +10,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useTheme } from "@/context/ThemeContext";
 import DarkModeToggle from "@/components/layout/DarkModeToggle";
+import { useLanguage } from "@/context/LanguageContext";
+import LanguageSwitcher from "@/components/layout/LanguageSwitcher";
 
 const Login: React.FC = () => {
   const { login, signup } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const { t } = useLanguage();
 
   // Login form state
   const [loginEmail, setLoginEmail] = useState("");
@@ -56,41 +59,42 @@ const Login: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-forest-50 to-white dark:from-forest-900 dark:to-forest-800 p-4">
-      <div className="absolute top-4 right-4">
+      <div className="absolute top-4 right-4 flex items-center space-x-2">
+        <LanguageSwitcher />
         <DarkModeToggle />
       </div>
       
       <div className="w-full max-w-md space-y-8">
         <div className="flex flex-col items-center justify-center space-y-2 animate-fade-in">
           <Shield className="h-12 w-12 text-forest-500" />
-          <h1 className="text-3xl font-bold text-forest-900 dark:text-white">LeadShield</h1>
+          <h1 className="text-3xl font-bold text-forest-900 dark:text-white">{t("app.name")}</h1>
           <p className="text-sm text-forest-600 dark:text-forest-300">
-            Protect your business from fraudulent leads
+            {t("app.tagline")}
           </p>
         </div>
 
         <Tabs defaultValue="login" className="w-full">
           <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="login">Login</TabsTrigger>
-            <TabsTrigger value="signup">Sign Up</TabsTrigger>
+            <TabsTrigger value="login">{t("nav.login")}</TabsTrigger>
+            <TabsTrigger value="signup">{t("nav.signup")}</TabsTrigger>
           </TabsList>
           
           <TabsContent value="login">
             <Card className="glass-card">
               <CardHeader>
-                <CardTitle>Welcome back</CardTitle>
-                <CardDescription>Enter your credentials to access your account</CardDescription>
+                <CardTitle>{t("login.welcome")}</CardTitle>
+                <CardDescription>{t("login.enter_credentials")}</CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleLogin} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="login-email">Email</Label>
+                    <Label htmlFor="login-email">{t("login.email")}</Label>
                     <div className="relative">
                       <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                       <Input
                         id="login-email"
                         type="email"
-                        placeholder="you@example.com"
+                        placeholder={t("login.email_placeholder")}
                         className="pl-10"
                         value={loginEmail}
                         onChange={(e) => setLoginEmail(e.target.value)}
@@ -100,7 +104,7 @@ const Login: React.FC = () => {
                   </div>
                   
                   <div className="space-y-2">
-                    <Label htmlFor="login-password">Password</Label>
+                    <Label htmlFor="login-password">{t("login.password")}</Label>
                     <div className="relative">
                       <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                       <Input
@@ -126,15 +130,15 @@ const Login: React.FC = () => {
                     className="w-full bg-forest-500 hover:bg-forest-600" 
                     disabled={isLoading}
                   >
-                    {isLoading ? "Logging in..." : "Login"}
+                    {isLoading ? t("login.logging_in") : t("nav.login")}
                   </Button>
                 </form>
               </CardContent>
               <CardFooter className="flex justify-center">
                 <p className="text-xs text-muted-foreground text-center">
-                  Demo credentials: <br />
-                  admin@leadshield.com / password <br />
-                  operator@leadshield.com / password <br />
+                  {t("login.demo_credentials")}<br />
+                  admin@leadshield.com / password<br />
+                  operator@leadshield.com / password<br />
                   customer@example.com / password
                 </p>
               </CardFooter>
@@ -144,18 +148,18 @@ const Login: React.FC = () => {
           <TabsContent value="signup">
             <Card className="glass-card">
               <CardHeader>
-                <CardTitle>Create account</CardTitle>
-                <CardDescription>Enter your details to create a new account</CardDescription>
+                <CardTitle>{t("signup.create_account")}</CardTitle>
+                <CardDescription>{t("signup.enter_details")}</CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSignup} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="signup-name">Full Name</Label>
+                    <Label htmlFor="signup-name">{t("signup.full_name")}</Label>
                     <div className="relative">
                       <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                       <Input
                         id="signup-name"
-                        placeholder="John Doe"
+                        placeholder={t("signup.name_placeholder")}
                         className="pl-10"
                         value={signupName}
                         onChange={(e) => setSignupName(e.target.value)}
@@ -165,12 +169,12 @@ const Login: React.FC = () => {
                   </div>
                   
                   <div className="space-y-2">
-                    <Label htmlFor="signup-company">Company Name</Label>
+                    <Label htmlFor="signup-company">{t("signup.company_name")}</Label>
                     <div className="relative">
                       <Briefcase className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                       <Input
                         id="signup-company"
-                        placeholder="Your Company"
+                        placeholder={t("signup.company_placeholder")}
                         className="pl-10"
                         value={signupCompany}
                         onChange={(e) => setSignupCompany(e.target.value)}
@@ -180,13 +184,13 @@ const Login: React.FC = () => {
                   </div>
                   
                   <div className="space-y-2">
-                    <Label htmlFor="signup-email">Email</Label>
+                    <Label htmlFor="signup-email">{t("login.email")}</Label>
                     <div className="relative">
                       <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                       <Input
                         id="signup-email"
                         type="email"
-                        placeholder="you@example.com"
+                        placeholder={t("login.email_placeholder")}
                         className="pl-10"
                         value={signupEmail}
                         onChange={(e) => setSignupEmail(e.target.value)}
@@ -196,7 +200,7 @@ const Login: React.FC = () => {
                   </div>
                   
                   <div className="space-y-2">
-                    <Label htmlFor="signup-password">Password</Label>
+                    <Label htmlFor="signup-password">{t("login.password")}</Label>
                     <div className="relative">
                       <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                       <Input
@@ -222,7 +226,7 @@ const Login: React.FC = () => {
                     className="w-full bg-forest-500 hover:bg-forest-600" 
                     disabled={isLoading}
                   >
-                    {isLoading ? "Creating account..." : "Create Account"}
+                    {isLoading ? t("signup.creating_account") : t("signup.create_button")}
                   </Button>
                 </form>
               </CardContent>
@@ -232,7 +236,7 @@ const Login: React.FC = () => {
       </div>
 
       <div className="mt-8 text-sm text-center text-muted-foreground">
-        <p>© 2025 LeadShield. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} {t("app.name")}. {t("footer.copyright")}</p>
       </div>
     </div>
   );

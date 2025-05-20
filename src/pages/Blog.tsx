@@ -1,48 +1,52 @@
+
 import React from "react";
 import PublicNavbar from "@/components/layout/PublicNavbar";
+import { useLanguage } from "@/context/LanguageContext";
 
 const Blog = () => {
-  // Example blog posts
+  const { t, language } = useLanguage();
+  
+  // Example blog posts - using t function for content that needs translation
   const blogPosts = [
     {
       id: 1,
-      title: "How to Identify Fraudulent Leads: 5 Warning Signs",
-      excerpt: "Learn how to spot fake leads before they waste your time and resources.",
-      date: "May 10, 2024",
+      title: t("blog.post1.title"),
+      excerpt: t("blog.post1.excerpt"),
+      date: t("blog.post1.date"),
       author: "Sarah Johnson",
-      category: "Lead Management"
+      category: t("blog.categories.lead_management")
     },
     {
       id: 2,
-      title: "The True Cost of Fake Leads for Small Businesses",
-      excerpt: "Discover how fraudulent leads impact your bottom line and what you can do about it.",
-      date: "April 25, 2024",
+      title: t("blog.post2.title"),
+      excerpt: t("blog.post2.excerpt"),
+      date: t("blog.post2.date"),
       author: "Michael Chen",
-      category: "Business"
+      category: t("blog.categories.business")
     },
     {
       id: 3,
-      title: "AI-Powered Lead Verification: The Future of Sales",
-      excerpt: "See how artificial intelligence is revolutionizing the way businesses validate leads.",
-      date: "April 12, 2024",
+      title: t("blog.post3.title"),
+      excerpt: t("blog.post3.excerpt"),
+      date: t("blog.post3.date"),
       author: "Alexis Rodriguez",
-      category: "Technology"
+      category: t("blog.categories.technology")
     },
     {
       id: 4,
-      title: "LeadShield Announces Series A Funding",
-      excerpt: "We're excited to announce our latest round of funding, which will help us expand our reach and continue to innovate.",
-      date: "March 20, 2024",
-      author: "LeadShield Team",
-      category: "Company News"
+      title: t("blog.post4.title"),
+      excerpt: t("blog.post4.excerpt"),
+      date: t("blog.post4.date"),
+      author: t("blog.team"),
+      category: t("blog.categories.news")
     },
     {
       id: 5,
-      title: "Top 10 Lead Generation Strategies for 2024",
-      excerpt: "Stay ahead of the curve with these proven lead generation techniques.",
-      date: "February 5, 2024",
+      title: t("blog.post5.title"),
+      excerpt: t("blog.post5.excerpt"),
+      date: t("blog.post5.date"),
       author: "David Lee",
-      category: "Lead Generation"
+      category: t("blog.categories.lead_generation")
     },
   ];
 
@@ -54,9 +58,9 @@ const Blog = () => {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-forest-900 dark:text-white mb-4">LeadShield Blog</h1>
+          <h1 className="text-4xl font-bold text-forest-900 dark:text-white mb-4">{t("blog.title")}</h1>
           <p className="text-lg text-forest-600 dark:text-forest-300 max-w-3xl mx-auto">
-            Insights and strategies to protect your business from fraudulent leads
+            {t("blog.subtitle")}
           </p>
         </div>
 
@@ -76,9 +80,9 @@ const Blog = () => {
                 <h3 className="text-xl font-bold text-forest-900 dark:text-white mb-2">{post.title}</h3>
                 <p className="text-forest-600 dark:text-forest-300 mb-4">{post.excerpt}</p>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-forest-500 dark:text-forest-400">By {post.author}</span>
+                  <span className="text-sm text-forest-500 dark:text-forest-400">{t("blog.by")} {post.author}</span>
                   <a href="#" className="text-forest-500 dark:text-forest-300 font-medium text-sm hover:underline">
-                    Read More
+                    {t("blog.read_more")}
                   </a>
                 </div>
               </div>
@@ -91,7 +95,7 @@ const Blog = () => {
       <footer className="bg-white dark:bg-forest-900 border-t border-forest-100 dark:border-forest-800 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center text-forest-600 dark:text-forest-300">
-            &copy; {new Date().getFullYear()} LeadShield. All rights reserved.
+            &copy; {new Date().getFullYear()} {t("app.name")}. {t("footer.copyright")}
           </p>
         </div>
       </footer>
