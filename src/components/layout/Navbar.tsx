@@ -3,8 +3,10 @@ import { useEffect, useState } from "react";
 import { Bell, Menu } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import DarkModeToggle from "./DarkModeToggle";
+import LanguageSwitcher from "./LanguageSwitcher";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/context/LanguageContext";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,6 +18,7 @@ import {
 
 const Navbar = () => {
   const { user, logout } = useAuth();
+  const { t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -55,6 +58,7 @@ const Navbar = () => {
             <Bell className="h-5 w-5" />
             <span className="absolute top-1 right-1 w-2 h-2 bg-forest-500 rounded-full"></span>
           </Button>
+          <LanguageSwitcher />
           <DarkModeToggle />
           
           {user && (
@@ -75,11 +79,11 @@ const Navbar = () => {
                   <span>Profile</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem className="flex items-center gap-2">
-                  <span>Settings</span>
+                  <span>{t("nav.settings")}</span>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={logout} className="flex items-center gap-2">
-                  <span>Log out</span>
+                  <span>{t("nav.logout")}</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

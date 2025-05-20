@@ -8,25 +8,27 @@ import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import ScoreConfig from "@/components/settings/ScoreConfig";
 import { useAuth } from "@/context/AuthContext";
+import { useLanguage } from "@/context/LanguageContext";
 
 const Settings: React.FC = () => {
   const { user } = useAuth();
+  const { t } = useLanguage();
 
   return (
     <div className="flex-1 p-8 pt-24 max-w-7xl mx-auto">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight">Settings</h1>
+        <h1 className="text-3xl font-bold tracking-tight">{t("settings.title")}</h1>
         <p className="text-muted-foreground">
-          Manage your account settings and preferences
+          {t("settings.subtitle")}
         </p>
       </div>
 
       <Tabs defaultValue="score">
         <TabsList className="mb-8">
-          <TabsTrigger value="account">Account</TabsTrigger>
-          <TabsTrigger value="score">Score Configuration</TabsTrigger>
-          <TabsTrigger value="notifications">Notifications</TabsTrigger>
-          <TabsTrigger value="api">API Keys</TabsTrigger>
+          <TabsTrigger value="account">{t("settings.account")}</TabsTrigger>
+          <TabsTrigger value="score">{t("settings.scoreConfig")}</TabsTrigger>
+          <TabsTrigger value="notifications">{t("settings.notifications")}</TabsTrigger>
+          <TabsTrigger value="api">{t("settings.api")}</TabsTrigger>
         </TabsList>
         
         <TabsContent value="account">

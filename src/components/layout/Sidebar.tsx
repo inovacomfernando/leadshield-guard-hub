@@ -11,11 +11,13 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { useAuth } from "@/context/AuthContext";
+import { useLanguage } from "@/context/LanguageContext";
 import { Shield, Home, Users, Settings, CreditCard, LogOut, ChartBar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function AppSidebar() {
   const { user, logout } = useAuth();
+  const { t } = useLanguage();
   const location = useLocation();
   const [collapsed, setCollapsed] = useState(false);
 
@@ -40,7 +42,7 @@ export function AppSidebar() {
             <SidebarMenuButton asChild className={location.pathname === "/dashboard" ? "bg-forest-100 dark:bg-forest-800 text-forest-900 dark:text-white" : ""}>
               <Link to="/dashboard" className="flex items-center space-x-2">
                 <Home className="h-5 w-5" />
-                {!collapsed && <span>Dashboard</span>}
+                {!collapsed && <span>{t("nav.dashboard")}</span>}
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -48,7 +50,7 @@ export function AppSidebar() {
             <SidebarMenuButton asChild className={location.pathname === "/leads" ? "bg-forest-100 dark:bg-forest-800 text-forest-900 dark:text-white" : ""}>
               <Link to="/leads" className="flex items-center space-x-2">
                 <Users className="h-5 w-5" />
-                {!collapsed && <span>Leads</span>}
+                {!collapsed && <span>{t("nav.leads")}</span>}
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -56,7 +58,7 @@ export function AppSidebar() {
             <SidebarMenuButton asChild className={location.pathname === "/features" ? "bg-forest-100 dark:bg-forest-800 text-forest-900 dark:text-white" : ""}>
               <Link to="/features" className="flex items-center space-x-2">
                 <Shield className="h-5 w-5" />
-                {!collapsed && <span>Features</span>}
+                {!collapsed && <span>{t("nav.features")}</span>}
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -64,7 +66,7 @@ export function AppSidebar() {
             <SidebarMenuButton asChild className={location.pathname === "/billing" ? "bg-forest-100 dark:bg-forest-800 text-forest-900 dark:text-white" : ""}>
               <Link to="/billing" className="flex items-center space-x-2">
                 <CreditCard className="h-5 w-5" />
-                {!collapsed && <span>Billing</span>}
+                {!collapsed && <span>{t("nav.billing")}</span>}
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -72,7 +74,7 @@ export function AppSidebar() {
             <SidebarMenuButton asChild className={location.pathname === "/settings" ? "bg-forest-100 dark:bg-forest-800 text-forest-900 dark:text-white" : ""}>
               <Link to="/settings" className="flex items-center space-x-2">
                 <Settings className="h-5 w-5" />
-                {!collapsed && <span>Settings</span>}
+                {!collapsed && <span>{t("nav.settings")}</span>}
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -101,7 +103,7 @@ export function AppSidebar() {
             className="flex items-center justify-start space-x-2"
           >
             <LogOut className="h-5 w-5" />
-            {!collapsed && <span>Logout</span>}
+            {!collapsed && <span>{t("nav.logout")}</span>}
           </Button>
         </div>
       </SidebarFooter>

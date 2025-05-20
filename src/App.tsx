@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { AuthProvider } from "@/context/AuthContext";
+import { LanguageProvider } from "@/context/LanguageContext";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import AppSidebar from "@/components/layout/Sidebar";
 import Navbar from "@/components/layout/Navbar";
@@ -58,31 +59,33 @@ const App = () => (
     <BrowserRouter>
       <ThemeProvider>
         <TooltipProvider>
-          <AuthProvider>
-            <Toaster />
-            <Sonner />
-            <Routes>
-              {/* Public routes */}
-              <Route path="/" element={<Index />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/success-stories" element={<SuccessStories />} />
-              <Route path="/documentation" element={<Documentation />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/careers" element={<Careers />} />
-              <Route path="/contact" element={<Contact />} />
+          <LanguageProvider>
+            <AuthProvider>
+              <Toaster />
+              <Sonner />
+              <Routes>
+                {/* Public routes */}
+                <Route path="/" element={<Index />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/success-stories" element={<SuccessStories />} />
+                <Route path="/documentation" element={<Documentation />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/careers" element={<Careers />} />
+                <Route path="/contact" element={<Contact />} />
 
-              {/* Protected routes */}
-              <Route path="/dashboard" element={<PrivateRoute element={<Dashboard />} />} />
-              <Route path="/leads" element={<PrivateRoute element={<Leads />} />} />
-              <Route path="/settings" element={<PrivateRoute element={<Settings />} />} />
-              <Route path="/billing" element={<PrivateRoute element={<Billing />} />} />
-              <Route path="/features" element={<PrivateRoute element={<Features />} />} />
+                {/* Protected routes */}
+                <Route path="/dashboard" element={<PrivateRoute element={<Dashboard />} />} />
+                <Route path="/leads" element={<PrivateRoute element={<Leads />} />} />
+                <Route path="/settings" element={<PrivateRoute element={<Settings />} />} />
+                <Route path="/billing" element={<PrivateRoute element={<Billing />} />} />
+                <Route path="/features" element={<PrivateRoute element={<Features />} />} />
 
-              {/* 404 route */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </AuthProvider>
+                {/* 404 route */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </AuthProvider>
+          </LanguageProvider>
         </TooltipProvider>
       </ThemeProvider>
     </BrowserRouter>
