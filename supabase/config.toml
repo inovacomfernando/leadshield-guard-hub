@@ -1,1 +1,6 @@
+
+# This is the project configuration for your Supabase Edge Functions.
 project_id = "tolcvuukssapooppjkif"
+
+[functions.bot-executor]
+verify_jwt = true

@@ -1,66 +1,76 @@
 
-import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2.38.4";
+// Supabase Edge Function for bot execution
+import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-const supabaseUrl = Deno.env.get("SUPABASE_URL") || "";
-const supabaseAnonKey = Deno.env.get("SUPABASE_ANON_KEY") || "";
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
-
+// Define CORS headers for API responses
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-interface BotExecutionRequest {
-  configId: string;
-  immediate?: boolean;
-}
-
-serve(async (req: Request) => {
+// Handle HTTP requests
+serve(async (req) => {
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
-    return new Response(null, { headers: corsHeaders });
+    return new Response(null, {
+      headers: corsHeaders,
+      status: 204,
+    });
   }
 
   try {
-    const { configId, immediate = false }: BotExecutionRequest = await req.json();
+    // Initialize Supabase client
+    const supabaseClient = createClient(
+      Deno.env.get("SUPABASE_URL") ?? "",
+      Deno.env.get("SUPABASE_ANON_KEY") ?? ""
+    );
 
-    // Get the bot configuration
-    const { data: botConfig, error: configError } = await supabase
+    // Get request body
+    const data = await req.json();
+    const { configId, immediate = false } = data;
+
+    console.log("Bot execution requested for config:", configId);
+
+    if (!configId) {
+      return new Response(
+        JSON.stringify({ error: "Missing configId parameter" }),
+        { 
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+          status: 400 
+        }
+      );
+    }
+
+    // Get bot configuration
+    const { data: botConfig, error: configError } = await supabaseClient
       .from("bot_configs")
       .select("*")
       .eq("id", configId)
       .single();
 
     if (configError || !botConfig) {
-      console.error("Error fetching bot configuration:", configError);
+      console.error("Error fetching bot config:", configError);
       return new Response(
-        JSON.stringify({ 
-          error: "Bot configuration not found", 
-          details: configError?.message 
-        }),
-        {
-          status: 404,
-          headers: { "Content-Type": "application/json", ...corsHeaders },
+        JSON.stringify({ error: "Bot configuration not found" }),
+        { 
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+          status: 404 
         }
       );
     }
 
-    // In a real implementation, this is where you would:
-    // 1. Validate the execution time against the schedule if not immediate
-    // 2. Send the task to a worker or external service that runs Selenium/Puppeteer
-    // 3. For demo purposes, we'll just simulate a successful execution
-    
-    // Log the execution attempt
-    const { data: logEntry, error: logError } = await supabase
+    // Create execution log entry
+    const { data: logEntry, error: logError } = await supabaseClient
       .from("bot_execution_logs")
       .insert({
         bot_config_id: configId,
-        status: "scheduled",
+        status: "pending",
         execution_details: {
-          scheduled: new Date().toISOString(),
           immediate: immediate,
-          execution_mode: "simulation" // In real implementation: "headless", "visible", etc.
+          scheduled_time: new Date().toISOString(),
+          target_url: botConfig.target_url,
+          field_count: Object.keys(botConfig.form_selectors).length,
         }
       })
       .select()
@@ -69,38 +79,98 @@ serve(async (req: Request) => {
     if (logError) {
       console.error("Error creating log entry:", logError);
       return new Response(
-        JSON.stringify({ error: "Failed to create execution log", details: logError.message }),
-        {
-          status: 500,
-          headers: { "Content-Type": "application/json", ...corsHeaders },
+        JSON.stringify({ error: "Failed to create execution log" }),
+        { 
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+          status: 500 
         }
       );
     }
 
-    // Return success response
+    // Process mock execution (in real implementation, this would use a headless browser)
+    // In a production environment, this would likely be done asynchronously
+    const executionResult = await mockBotExecution(botConfig);
+    
+    // Update log with execution results
+    const { error: updateError } = await supabaseClient
+      .from("bot_execution_logs")
+      .update({
+        status: executionResult.success ? "success" : "failure",
+        response_data: executionResult.response,
+        execution_details: {
+          ...logEntry.execution_details,
+          execution_time: executionResult.executionTime,
+          completed_at: new Date().toISOString(),
+          fields_filled: executionResult.fieldsFilled,
+        }
+      })
+      .eq("id", logEntry.id);
+
+    if (updateError) {
+      console.error("Error updating log entry:", updateError);
+      return new Response(
+        JSON.stringify({ error: "Failed to update execution log" }),
+        { 
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+          status: 500 
+        }
+      );
+    }
+
     return new Response(
       JSON.stringify({
-        message: "Bot execution scheduled successfully",
-        execution: {
-          id: logEntry.id,
-          status: "scheduled",
-          configName: botConfig.name,
-          targetUrl: botConfig.target_url
-        }
+        message: "Bot execution completed",
+        success: executionResult.success,
+        logId: logEntry.id
       }),
-      {
-        status: 200,
-        headers: { "Content-Type": "application/json", ...corsHeaders },
+      { 
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 200 
       }
     );
   } catch (error) {
-    console.error("Error in bot executor function:", error);
+    console.error("Unexpected error:", error);
     return new Response(
-      JSON.stringify({ error: "Internal server error", details: error.message }),
-      {
-        status: 500,
-        headers: { "Content-Type": "application/json", ...corsHeaders },
+      JSON.stringify({ error: "Internal server error" }),
+      { 
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 500 
       }
     );
   }
 });
+
+// Mock function for bot execution (would be replaced with real headless browser automation)
+async function mockBotExecution(botConfig: any) {
+  console.log(`Simulating bot execution for target: ${botConfig.target_url}`);
+  
+  // Simulate processing time
+  const startTime = new Date();
+  await new Promise(resolve => setTimeout(resolve, 2000));
+  const endTime = new Date();
+  const executionTime = endTime.getTime() - startTime.getTime();
+  
+  // Get form selectors
+  const formSelectors = botConfig.form_selectors;
+  const fieldsFilled = Object.keys(formSelectors).map(field => {
+    return {
+      field,
+      selector: formSelectors[field],
+      status: "filled"
+    };
+  });
+  
+  // Simulate successful form submission ~80% of the time
+  const success = Math.random() > 0.2;
+  
+  return {
+    success,
+    executionTime,
+    fieldsFilled,
+    response: {
+      statusCode: success ? 200 : 400,
+      message: success ? "Form submitted successfully" : "Failed to submit form",
+      timestamp: new Date().toISOString()
+    }
+  };
+}

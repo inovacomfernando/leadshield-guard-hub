@@ -14,13 +14,13 @@ import { useAuth } from "@/context/AuthContext";
 import { useLanguage } from "@/context/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Database } from "@/integrations/supabase/types";
+import { Json } from "@/integrations/supabase/types";
 
 interface BotConfig {
   id: string;
   name: string;
   target_url: string;
-  form_selectors: Record<string, string>;
+  form_selectors: Record<string, string> | Json;
   schedule: {
     frequency: string;
     time?: string;
@@ -31,6 +31,8 @@ interface BotConfig {
     ip_range?: string[];
   };
   created_at: string;
+  user_id?: string;
+  updated_at?: string;
 }
 
 interface ExecutionLog {
@@ -80,10 +82,24 @@ const BotManager = () => {
         .order("created_at", { ascending: false });
       
       if (error) throw error;
-      setBotConfigs(data || []);
       
-      if (data && data.length > 0) {
-        fetchExecutionLogs(data[0].id);
+      // Type cast and transform data to match BotConfig interface
+      const typedData = data?.map(item => ({
+        id: item.id,
+        name: item.name,
+        target_url: item.target_url,
+        form_selectors: item.form_selectors,
+        schedule: item.schedule as BotConfig['schedule'],
+        execution_rules: item.execution_rules as BotConfig['execution_rules'],
+        created_at: item.created_at || '',
+        user_id: item.user_id,
+        updated_at: item.updated_at
+      })) || [];
+      
+      setBotConfigs(typedData);
+      
+      if (typedData.length > 0) {
+        fetchExecutionLogs(typedData[0].id);
       }
     } catch (error) {
       console.error("Error fetching bot configurations:", error);
@@ -208,16 +224,16 @@ const BotManager = () => {
   return (
     <div className="flex-1 p-8 pt-24 max-w-7xl mx-auto">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight">{t("botManager.title", "Bot Manager")}</h1>
+        <h1 className="text-3xl font-bold tracking-tight">{t("botManager.title")}</h1>
         <p className="text-muted-foreground">
-          {t("botManager.subtitle", "Configure and manage automated form submission bots")}
+          {t("botManager.subtitle")}
         </p>
       </div>
 
       <Tabs defaultValue="configurations">
         <TabsList className="mb-8">
-          <TabsTrigger value="configurations">{t("botManager.tabs.configurations", "Configurations")}</TabsTrigger>
-          <TabsTrigger value="logs">{t("botManager.tabs.logs", "Execution Logs")}</TabsTrigger>
+          <TabsTrigger value="configurations">{t("botManager.tabs.configurations")}</TabsTrigger>
+          <TabsTrigger value="logs">{t("botManager.tabs.logs")}</TabsTrigger>
         </TabsList>
         
         <TabsContent value="configurations">
@@ -226,21 +242,21 @@ const BotManager = () => {
               <div className="flex justify-end">
                 <Button onClick={() => setIsCreating(true)} className="bg-forest-500 hover:bg-forest-600">
                   <PlusCircle className="h-4 w-4 mr-2" />
-                  {t("botManager.createNew", "Create New Bot")}
+                  {t("botManager.createNew")}
                 </Button>
               </div>
             ) : (
               <Card>
                 <CardHeader>
-                  <CardTitle>{t("botManager.createBot", "Create New Bot Configuration")}</CardTitle>
+                  <CardTitle>{t("botManager.createBot")}</CardTitle>
                   <CardDescription>
-                    {t("botManager.configDescription", "Define the target site, form fields, and execution rules")}
+                    {t("botManager.configDescription")}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div className="space-y-2">
-                      <Label htmlFor="name">{t("botManager.name", "Bot Name")}</Label>
+                      <Label htmlFor="name">{t("botManager.name")}</Label>
                       <Input 
                         id="name" 
                         value={formData.name}
@@ -249,7 +265,7 @@ const BotManager = () => {
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="target-url">{t("botManager.targetUrl", "Target URL")}</Label>
+                      <Label htmlFor="target-url">{t("botManager.targetUrl")}</Label>
                       <Input 
                         id="target-url" 
                         value={formData.target_url}
@@ -260,7 +276,7 @@ const BotManager = () => {
                   </div>
                   
                   <div className="space-y-2">
-                    <Label htmlFor="form-selectors">{t("botManager.formSelectors", "Form Field Selectors (JSON)")}</Label>
+                    <Label htmlFor="form-selectors">{t("botManager.formSelectors")}</Label>
                     <Textarea 
                       id="form-selectors" 
                       value={formData.form_selectors}
@@ -269,26 +285,26 @@ const BotManager = () => {
                       rows={5}
                     />
                     <p className="text-sm text-muted-foreground">
-                      {t("botManager.selectorsHint", "Define CSS selectors and values for form fields")}
+                      {t("botManager.selectorsHint")}
                     </p>
                   </div>
                   
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div className="space-y-2">
-                      <Label htmlFor="frequency">{t("botManager.frequency", "Execution Frequency")}</Label>
+                      <Label htmlFor="frequency">{t("botManager.frequency")}</Label>
                       <select
                         id="frequency"
                         className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
                         value={formData.frequency}
                         onChange={(e) => setFormData(prev => ({ ...prev, frequency: e.target.value }))}
                       >
-                        <option value="once">Once</option>
-                        <option value="daily">Daily</option>
-                        <option value="weekly">Weekly</option>
+                        <option value="once">{t("botManager.frequencyOptions.once")}</option>
+                        <option value="daily">{t("botManager.frequencyOptions.daily")}</option>
+                        <option value="weekly">{t("botManager.frequencyOptions.weekly")}</option>
                       </select>
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="time">{t("botManager.time", "Execution Time")}</Label>
+                      <Label htmlFor="time">{t("botManager.time")}</Label>
                       <Input 
                         id="time" 
                         type="time"
@@ -300,7 +316,7 @@ const BotManager = () => {
                   
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div className="space-y-2">
-                      <Label htmlFor="quantity">{t("botManager.quantity", "Submission Quantity")}</Label>
+                      <Label htmlFor="quantity">{t("botManager.quantity")}</Label>
                       <Input 
                         id="quantity" 
                         type="number"
@@ -310,7 +326,7 @@ const BotManager = () => {
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="ip-range">{t("botManager.ipRange", "IP Range (comma separated)")}</Label>
+                      <Label htmlFor="ip-range">{t("botManager.ipRange")}</Label>
                       <Input 
                         id="ip-range" 
                         value={formData.ip_range}
@@ -325,13 +341,13 @@ const BotManager = () => {
                     variant="outline" 
                     onClick={() => setIsCreating(false)}
                   >
-                    {t("botManager.cancel", "Cancel")}
+                    {t("botManager.cancel")}
                   </Button>
                   <Button 
                     className="bg-forest-500 hover:bg-forest-600"
                     onClick={handleCreateBot}
                   >
-                    {t("botManager.save", "Save Configuration")}
+                    {t("botManager.save")}
                   </Button>
                 </CardFooter>
               </Card>
@@ -352,7 +368,7 @@ const BotManager = () => {
                     <CardContent className="pb-2">
                       <div className="space-y-2 text-sm">
                         <div className="flex justify-between">
-                          <span className="text-muted-foreground">{t("botManager.schedule", "Schedule")}:</span>
+                          <span className="text-muted-foreground">{t("botManager.schedule")}</span>
                           <span className="font-medium">
                             {bot.schedule.frequency === "once" 
                               ? "One-time" 
@@ -360,7 +376,7 @@ const BotManager = () => {
                           </span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-muted-foreground">{t("botManager.quantity", "Quantity")}:</span>
+                          <span className="text-muted-foreground">{t("botManager.quantity")}</span>
                           <span className="font-medium">{bot.execution_rules.quantity}</span>
                         </div>
                       </div>
@@ -397,7 +413,7 @@ const BotManager = () => {
                         onClick={() => handleExecuteBot(bot.id)}
                       >
                         <Play className="h-4 w-4 mr-1" />
-                        {t("botManager.execute", "Execute")}
+                        {t("botManager.execute")}
                       </Button>
                     </CardFooter>
                   </Card>
@@ -406,7 +422,7 @@ const BotManager = () => {
             ) : (
               <div className="text-center py-10 border rounded-lg bg-slate-50 dark:bg-slate-900">
                 <p className="text-muted-foreground">
-                  {t("botManager.noConfigs", "No bot configurations found. Create one to get started.")}
+                  {t("botManager.noConfigs")}
                 </p>
               </div>
             )}
@@ -418,8 +434,8 @@ const BotManager = () => {
             <CardHeader>
               <CardTitle className="flex items-center justify-between">
                 {selectedBot 
-                  ? `${t("botManager.logsFor", "Execution Logs for")}: ${selectedBot.name}`
-                  : t("botManager.executionLogs", "Execution Logs")}
+                  ? `${t("botManager.logsFor")}: ${selectedBot.name}`
+                  : t("botManager.executionLogs")}
                 
                 {botConfigs.length > 0 && (
                   <select
@@ -430,7 +446,7 @@ const BotManager = () => {
                       if (botId) fetchExecutionLogs(botId);
                     }}
                   >
-                    <option value="" disabled>{t("botManager.selectBot", "Select a bot")}</option>
+                    <option value="" disabled>{t("botManager.selectBot")}</option>
                     {botConfigs.map(bot => (
                       <option key={bot.id} value={bot.id}>{bot.name}</option>
                     ))}
@@ -475,8 +491,8 @@ const BotManager = () => {
                 <div className="text-center py-10">
                   <p className="text-muted-foreground">
                     {selectedBot 
-                      ? t("botManager.noLogsSelected", "No execution logs found for this bot")
-                      : t("botManager.selectBotFirst", "Select a bot to view its execution logs")}
+                      ? t("botManager.noLogsSelected")
+                      : t("botManager.selectBotFirst")}
                   </p>
                 </div>
               )}
