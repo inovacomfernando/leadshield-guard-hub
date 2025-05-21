@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -77,8 +78,8 @@ const App = () => (
                 {/* Protected routes */}
                 <Route path="/dashboard" element={<PrivateRoute element={<Dashboard />} />} />
                 <Route path="/leads" element={<PrivateRoute element={<Leads />} />} />
-                <Route path="/settings" element={<Settings />} />
-                <Route path="/bot-manager" element={<BotManager />} />
+                <Route path="/settings" element={<PrivateRoute element={<Settings />} />} />
+                <Route path="/bot-manager" element={<PrivateRoute element={<BotManager />} />} />
                 <Route path="/billing" element={<PrivateRoute element={<Billing />} />} />
                 <Route path="/features" element={<PrivateRoute element={<Features />} />} />
 

@@ -14,13 +14,12 @@ import { useAuth } from "@/context/AuthContext";
 import { useLanguage } from "@/context/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Json } from "@/integrations/supabase/types";
 
 interface BotConfig {
   id: string;
   name: string;
   target_url: string;
-  form_selectors: Record<string, string> | Json;
+  form_selectors: Record<string, string>;
   schedule: {
     frequency: string;
     time?: string;
@@ -83,12 +82,12 @@ const BotManager = () => {
       
       if (error) throw error;
       
-      // Type cast and transform data to match BotConfig interface
+      // Transform data to match BotConfig interface
       const typedData = data?.map(item => ({
         id: item.id,
         name: item.name,
         target_url: item.target_url,
-        form_selectors: item.form_selectors,
+        form_selectors: item.form_selectors as Record<string, string>,
         schedule: item.schedule as BotConfig['schedule'],
         execution_rules: item.execution_rules as BotConfig['execution_rules'],
         created_at: item.created_at || '',
@@ -103,7 +102,7 @@ const BotManager = () => {
       }
     } catch (error) {
       console.error("Error fetching bot configurations:", error);
-      toast.error("Failed to load bot configurations");
+      toast.error(t("errors.loadingFailed"));
     } finally {
       setIsLoading(false);
     }
@@ -122,7 +121,7 @@ const BotManager = () => {
       setSelectedBot(botConfigs.find(bot => bot.id === botId) || null);
     } catch (error) {
       console.error("Error fetching execution logs:", error);
-      toast.error("Failed to load execution logs");
+      toast.error(t("errors.loadingFailed"));
     }
   };
 
@@ -151,7 +150,7 @@ const BotManager = () => {
 
       if (error) throw error;
       
-      toast.success("Bot configuration created successfully");
+      toast.success(t("botManager.createdSuccess"));
       setIsCreating(false);
       setFormData({
         name: "",
@@ -166,12 +165,12 @@ const BotManager = () => {
       fetchBotConfigs();
     } catch (error: any) {
       console.error("Error creating bot configuration:", error);
-      toast.error("Failed to create bot configuration");
+      toast.error(t("errors.createFailed"));
     }
   };
 
   const handleDeleteBot = async (id: string) => {
-    if (window.confirm("Are you sure you want to delete this bot configuration?")) {
+    if (window.confirm(t("botManager.confirmDelete"))) {
       try {
         const { error } = await supabase
           .from("bot_configs")
@@ -180,7 +179,7 @@ const BotManager = () => {
 
         if (error) throw error;
         
-        toast.success("Bot configuration deleted successfully");
+        toast.success(t("botManager.deletedSuccess"));
         fetchBotConfigs();
         if (selectedBot?.id === id) {
           setSelectedBot(null);
@@ -188,18 +187,18 @@ const BotManager = () => {
         }
       } catch (error) {
         console.error("Error deleting bot configuration:", error);
-        toast.error("Failed to delete bot configuration");
+        toast.error(t("errors.deleteFailed"));
       }
     }
   };
 
   const handleExecuteBot = async (id: string) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/bot-executor`, {
+      const response = await fetch("https://tolcvuukssapooppjkif.supabase.co/functions/v1/bot-executor", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`
+          "Authorization": `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY || ""}`
         },
         body: JSON.stringify({
           configId: id,
@@ -210,14 +209,14 @@ const BotManager = () => {
       const result = await response.json();
       
       if (!response.ok) {
-        throw new Error(result.error || "Failed to execute bot");
+        throw new Error(result.error || t("errors.executeFailed"));
       }
       
-      toast.success("Bot execution scheduled successfully");
+      toast.success(t("botManager.executeSuccess"));
       fetchExecutionLogs(id);
     } catch (error: any) {
       console.error("Error executing bot:", error);
-      toast.error("Failed to execute bot");
+      toast.error(t("errors.executeFailed"));
     }
   };
 
@@ -261,7 +260,7 @@ const BotManager = () => {
                         id="name" 
                         value={formData.name}
                         onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                        placeholder="E.g., Contact Form Bot"
+                        placeholder={t("botManager.namePlaceholder")}
                       />
                     </div>
                     <div className="space-y-2">
@@ -270,7 +269,7 @@ const BotManager = () => {
                         id="target-url" 
                         value={formData.target_url}
                         onChange={(e) => setFormData(prev => ({ ...prev, target_url: e.target.value }))}
-                        placeholder="https://example.com/contact"
+                        placeholder={t("botManager.urlPlaceholder")}
                       />
                     </div>
                   </div>
@@ -281,7 +280,7 @@ const BotManager = () => {
                       id="form-selectors" 
                       value={formData.form_selectors}
                       onChange={(e) => setFormData(prev => ({ ...prev, form_selectors: e.target.value }))}
-                      placeholder='{"name": "#name", "email": "#email", "message": "#message"}'
+                      placeholder={t("botManager.selectorsPlaceholder")}
                       rows={5}
                     />
                     <p className="text-sm text-muted-foreground">
@@ -331,7 +330,7 @@ const BotManager = () => {
                         id="ip-range" 
                         value={formData.ip_range}
                         onChange={(e) => setFormData(prev => ({ ...prev, ip_range: e.target.value }))}
-                        placeholder="192.168.1.1, 10.0.0.1"
+                        placeholder={t("botManager.ipRangePlaceholder")}
                       />
                     </div>
                   </div>
@@ -371,7 +370,7 @@ const BotManager = () => {
                           <span className="text-muted-foreground">{t("botManager.schedule")}</span>
                           <span className="font-medium">
                             {bot.schedule.frequency === "once" 
-                              ? "One-time" 
+                              ? t("botManager.oneTime") 
                               : `${bot.schedule.frequency} at ${bot.schedule.time}`}
                           </span>
                         </div>
@@ -387,14 +386,14 @@ const BotManager = () => {
                           variant="ghost" 
                           size="icon" 
                           onClick={() => fetchExecutionLogs(bot.id)}
-                          title="View logs"
+                          title={t("botManager.viewLogs")}
                         >
                           <FileText className="h-4 w-4" />
                         </Button>
                         <Button 
                           variant="ghost" 
                           size="icon"
-                          title="Edit configuration"
+                          title={t("botManager.editConfig")}
                         >
                           <Edit className="h-4 w-4" />
                         </Button>
@@ -402,7 +401,7 @@ const BotManager = () => {
                           variant="ghost" 
                           size="icon"
                           onClick={() => handleDeleteBot(bot.id)}
-                          title="Delete configuration"
+                          title={t("botManager.deleteConfig")}
                         >
                           <Trash2 className="h-4 w-4 text-destructive" />
                         </Button>
