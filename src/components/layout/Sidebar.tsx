@@ -1,5 +1,6 @@
+
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/context/AuthContext";
 import { useLanguage } from "@/context/LanguageContext";
@@ -20,6 +21,10 @@ const Sidebar: React.FC = () => {
   const { user, logout } = useAuth();
   const { t } = useLanguage();
   const { theme, setTheme } = useTheme();
+  const location = useLocation();
+
+  // Helper to check if a path is active
+  const isActive = (path: string) => location.pathname === path;
 
   return (
     <div className="flex flex-col h-full bg-white border-r py-4 dark:bg-forest-900 dark:border-forest-700">
@@ -34,14 +39,12 @@ const Sidebar: React.FC = () => {
       <div className="flex-1 space-y-1">
         <Link
           to="/dashboard"
-          className={({ isActive }) =>
-            cn(
-              "flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors",
-              isActive
-                ? "bg-forest-100 text-forest-900 dark:bg-forest-800 dark:text-forest-50"
-                : "text-gray-500 hover:bg-forest-100 dark:text-gray-400 dark:hover:bg-forest-800 dark:hover:text-forest-50"
-            )
-          }
+          className={cn(
+            "flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors",
+            isActive("/dashboard")
+              ? "bg-forest-100 text-forest-900 dark:bg-forest-800 dark:text-forest-50"
+              : "text-gray-500 hover:bg-forest-100 dark:text-gray-400 dark:hover:bg-forest-800 dark:hover:text-forest-50"
+          )}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -61,14 +64,12 @@ const Sidebar: React.FC = () => {
 
         <Link
           to="/leads"
-          className={({ isActive }) =>
-            cn(
-              "flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors",
-              isActive
-                ? "bg-forest-100 text-forest-900 dark:bg-forest-800 dark:text-forest-50"
-                : "text-gray-500 hover:bg-forest-100 dark:text-gray-400 dark:hover:bg-forest-800 dark:hover:text-forest-50"
-            )
-          }
+          className={cn(
+            "flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors",
+            isActive("/leads")
+              ? "bg-forest-100 text-forest-900 dark:bg-forest-800 dark:text-forest-50"
+              : "text-gray-500 hover:bg-forest-100 dark:text-gray-400 dark:hover:bg-forest-800 dark:hover:text-forest-50"
+          )}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -90,14 +91,12 @@ const Sidebar: React.FC = () => {
 
         <Link
           to="/settings"
-          className={({ isActive }) =>
-            cn(
-              "flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors",
-              isActive
-                ? "bg-forest-100 text-forest-900 dark:bg-forest-800 dark:text-forest-50"
-                : "text-gray-500 hover:bg-forest-100 dark:text-gray-400 dark:hover:bg-forest-800 dark:hover:text-forest-50"
-            )
-          }
+          className={cn(
+            "flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors",
+            isActive("/settings")
+              ? "bg-forest-100 text-forest-900 dark:bg-forest-800 dark:text-forest-50"
+              : "text-gray-500 hover:bg-forest-100 dark:text-gray-400 dark:hover:bg-forest-800 dark:hover:text-forest-50"
+          )}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -118,14 +117,12 @@ const Sidebar: React.FC = () => {
 
       <Link
         to="/bot-manager"
-        className={({ isActive }) =>
-          cn(
-            "flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors",
-            isActive
-              ? "bg-forest-100 text-forest-900 dark:bg-forest-800 dark:text-forest-50"
-              : "text-gray-500 hover:bg-forest-100 dark:text-gray-400 dark:hover:bg-forest-800 dark:hover:text-forest-50"
-          )
-        }
+        className={cn(
+          "flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors",
+          isActive("/bot-manager")
+            ? "bg-forest-100 text-forest-900 dark:bg-forest-800 dark:text-forest-50"
+            : "text-gray-500 hover:bg-forest-100 dark:text-gray-400 dark:hover:bg-forest-800 dark:hover:text-forest-50"
+        )}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

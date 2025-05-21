@@ -14,6 +14,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useLanguage } from "@/context/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { Database } from "@/integrations/supabase/types";
 
 interface BotConfig {
   id: string;
@@ -147,7 +148,7 @@ const BotManager = () => {
         ip_range: ""
       });
       fetchBotConfigs();
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error creating bot configuration:", error);
       toast.error("Failed to create bot configuration");
     }
@@ -198,7 +199,7 @@ const BotManager = () => {
       
       toast.success("Bot execution scheduled successfully");
       fetchExecutionLogs(id);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error executing bot:", error);
       toast.error("Failed to execute bot");
     }

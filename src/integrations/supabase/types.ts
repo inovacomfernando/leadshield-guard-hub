@@ -9,7 +9,77 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      bot_configs: {
+        Row: {
+          created_at: string | null
+          execution_rules: Json
+          form_selectors: Json
+          id: string
+          name: string
+          schedule: Json
+          target_url: string
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          execution_rules: Json
+          form_selectors: Json
+          id?: string
+          name: string
+          schedule: Json
+          target_url: string
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          execution_rules?: Json
+          form_selectors?: Json
+          id?: string
+          name?: string
+          schedule?: Json
+          target_url?: string
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      bot_execution_logs: {
+        Row: {
+          bot_config_id: string | null
+          created_at: string | null
+          execution_details: Json | null
+          id: string
+          response_data: Json | null
+          status: string
+        }
+        Insert: {
+          bot_config_id?: string | null
+          created_at?: string | null
+          execution_details?: Json | null
+          id?: string
+          response_data?: Json | null
+          status: string
+        }
+        Update: {
+          bot_config_id?: string | null
+          created_at?: string | null
+          execution_details?: Json | null
+          id?: string
+          response_data?: Json | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bot_execution_logs_bot_config_id_fkey"
+            columns: ["bot_config_id"]
+            isOneToOne: false
+            referencedRelation: "bot_configs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
